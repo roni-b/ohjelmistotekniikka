@@ -10,4 +10,5 @@
 
 ### Viikko2 
 [tehtävät](https://github.com/roni-b/ohjelmistotekniikka/tree/main/laskarit/viikko2)
+
 [vaatimusmäärittely](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/vaatimusmaarittely.md)
