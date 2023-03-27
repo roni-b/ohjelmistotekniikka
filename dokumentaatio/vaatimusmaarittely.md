@@ -22,5 +22,5 @@ Kirjautumisen jälkeen
 
 Jatkokehitysideoita
 
-- Tietokannassa olevien lainausten järjestäminen jollain tavalla
+- Lainausten järjestäminen jollain tavalla
 - Hakutoiminto tietyn lainauksen tai sen tekijän etsimiseen
