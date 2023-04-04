@@ -1,16 +1,7 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-## Tehtävät
+### Dokumentaatio
 
-### Viikko 1
+- [vaatimusmäärittely](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/vaatimusmaarittely.md)
 
-[gitlog.txt](https://github.com/roni-b/ohjelmistotekniikka/blob/main/laskarit/viikko1/gitlog.txt)
-
-[komentorivi.txt](https://github.com/roni-b/ohjelmistotekniikka/blob/main/laskarit/viikko1/komentorivi.txt)
-
-### Viikko2 
-[tehtävät](https://github.com/roni-b/ohjelmistotekniikka/tree/main/laskarit/viikko2)
-
-[vaatimusmäärittely](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/vaatimusmaarittely.md)
-
-[tuntikirjanpito](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/tuntikirjanpito.md)
+- [tuntikirjanpito](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/tuntikirjanpito.md)
