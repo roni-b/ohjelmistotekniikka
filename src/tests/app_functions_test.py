@@ -7,5 +7,7 @@ class TestAppFunctions(unittest.TestCase):
         print("setup")
 
     def test_get_new_quote(self):
-        pass
+        result = app_functions.AppFunctions().get_new_quote()
+        
+        self.assertEqual(result, len(result)>0)
 
