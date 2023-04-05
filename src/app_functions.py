@@ -42,6 +42,3 @@ def test():
         return content, author, tags
     else:
         print("Error:", response.status_code, response.text)
-
-# if __name__ == '__main__':
-#     AppFunctions()
