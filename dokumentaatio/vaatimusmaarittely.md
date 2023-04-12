@@ -10,15 +10,15 @@ Yksi käyttäjärooli, eli normaali käyttäjä. Myöhemmin saatetaan lisätä p
 
 Ennen kirjautumista
 
-- Käyttäjä voi luoda uniikin käyttäjätunnuksen
-- Käyttäjä voi kirjautua sovellukseen kirjautumislomakkeen avulla
-- Sovellus tarkistaa, että tunnus ja salasana täsmäävät
+- [x] Käyttäjä voi luoda uniikin käyttäjätunnuksen
+- [x] Käyttäjä voi kirjautua sovellukseen kirjautumislomakkeen avulla
+- [x] Sovellus tarkistaa, että tunnus ja salasana täsmäävät
 
 Kirjautumisen jälkeen
 
-- Käyttäjä näkee tallennetut lainaukset ja painikkeen mistä saa haettua uuden lainauksen
-- Uuden lainauksen mukana toiminto jolla sen saa tallennettua tietokantaan tai piilotettua näkyvistä
-- Mahdollisuus kirjautua ulos
+- [x] Käyttäjä näkee tallennetut lainaukset ja painikkeen mistä saa haettua uuden lainauksen
+- [x] Uuden lainauksen mukana toiminto jolla sen saa tallennettua tietokantaan tai piilotettua näkyvistä
+- [x] Mahdollisuus kirjautua ulos
 
 Jatkokehitysideoita
 
