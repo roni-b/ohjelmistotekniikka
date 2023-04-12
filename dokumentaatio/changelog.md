@@ -9,6 +9,10 @@
 ## Viikko 4
 
 - Rakennettu sovelluksen käyttöliittymä pitkälti valmiiksi
+- Käyttäjä voi rekisteröityä ja kirjautua sekä kirjautua ulos
+- Käyttäjä voi hakea uuden lainauksen ja piilottaa lainauksen näkyvistä
+- Käyttäjä voi tallentaa lainauksia tietokantaan
+- Kirjautuneena voi selata tallennettuja lainauksia scrollaamalla
 - Tehty tietokannan käyttöön tarkoitetut funktiot
 - Tehty sovelluslogiikkaan tarvittavat metodit
 - Luotu tietokantaan monta moneen -suhde käyttäjän ja lainausten välille
