@@ -10,4 +10,5 @@
 | 5.4. | 2    | Käyttöliittymän toteutusta |
 | 11.4. | 4    | Tietokannan muokkausta, tietokannan funktioiden-, käyttöliittymän- ja sovelluslogiikan metodien toteutusta |
 | 12.4. | 4    | Koodin refaktorointi |
-| yht. | 26  |  |
+| 13.4. | 4    | Testien tekeminen |
+| yht. | 30  |  |
