@@ -17,3 +17,4 @@
 - Tehty sovelluslogiikkaan tarvittavat metodit
 - Luotu tietokantaan monta moneen -suhde käyttäjän ja lainausten välille
 - Parannettu koodin laatua Pylintin avulla
+- Testattu tähänastinen sovelluslogiikka ja saavutettu 100% haarautumakattavuus
