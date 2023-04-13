@@ -6,3 +6,4 @@ __pycache__
 alembic
 mydb.db
 alembic.ini
+htmlcov

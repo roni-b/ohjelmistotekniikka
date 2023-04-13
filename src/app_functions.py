@@ -17,6 +17,7 @@ class AppFunctions:
 
     def get_new_quote(self):
         # pylint: disable=E1101
+        # requests.codes.ok gives an nonexistent menber error but that .ok member exists
         api_url = 'https://api.quotable.io/random'
         response = requests.get(api_url, timeout=5)
         if response.status_code == requests.codes.ok:

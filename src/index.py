@@ -94,6 +94,7 @@ class App(ttk.Window):
 class GetQuoteButton(ttk.Button):
     def __init__(self, parent, response_text, response_author, response_tags, options, text):
         # pylint: disable=W0108
+        # lambda is necessary
         super().__init__(command=lambda: self.update_quote(),
                          master=parent, text="Get random quote")
         self.options = options
@@ -225,6 +226,7 @@ class LoginForm(ttk.Frame):
         self.label_register.grid(row=3, column=0)
         self.submit_button = ttk.Button(
             # pylint: disable=W0108
+            # lambda is necessary
             self, command=lambda: self.submit(), text="Login/register")
         self.submit_button.grid(row=3, column=1, columnspan=2, sticky="nsew")
 
