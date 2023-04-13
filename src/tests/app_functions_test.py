@@ -1,6 +1,7 @@
 import unittest
 import app_functions
 
+
 class TestAppFunctions(unittest.TestCase):
     def setUp(self):
         print("setup")
@@ -11,4 +12,4 @@ class TestAppFunctions(unittest.TestCase):
         self.assertTrue(content_length > 0)
 
 
-TestAppFunctions().test_get_new_quote_returns_something()
+#TestAppFunctions().test_get_new_quote_returns_something()

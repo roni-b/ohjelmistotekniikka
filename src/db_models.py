@@ -1,79 +1,76 @@
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, UniqueConstraint
+from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, Table, exc
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 Base = declarative_base()
+
+association_table = Table('association', Base.metadata,
+                          Column('quote_id', Integer, ForeignKey('quotes.id')),
+                          Column('user_id', Integer, ForeignKey('users.id'))
+                          )
 
 class User(Base):
     __tablename__ = "users"
     uid = Column("id", Integer, primary_key=True)
     username = Column("username", String, unique=True, nullable=False)
     password = Column("password", String, nullable=False)
+    quotes = relationship(
+        "Quote", secondary=association_table, back_populates="users")
 
-    def __init__(self, uid, username, password):
-        self.uid = uid
-        self.username = username
-        self.password = password
-    
     def __repr__(self):
-        return f"{self.uid} {self.username} {self.password}"
-    
+        return f"user: {self.uid} {self.username} {self.password}"
+
 class Quote(Base):
     __tablename__ = "quotes"
     qid = Column("id", Integer, primary_key=True)
     content = Column("content", String)
     author = Column("author", String)
     tags = Column("tags", String)
+    users = relationship(
+        "User", secondary=association_table, back_populates="quotes")
 
-    def __init__(self, qid, content, author, tags):
-        self.qid = qid
-        self.content = content
-        self.author = author
-        self.tags = tags
-    
     def __repr__(self):
-        return f"{self.qid} {self.content} {self.author} {self.tags}"
+        return f"quote: {self.qid} {self.content} {self.author} {self.tags}"
 
-# engine = create_engine("sqlite:///mydb.db", echo=True)
+engine = create_engine('sqlite:///mydb.db', echo=True)
 
-# Base.metadata.create_all(bind=engine)
+session_maker = sessionmaker(bind=engine)
 
-# Session = sessionmaker(bind=engine)
-# session = Session()
+def register(username, password):
+    with session_maker() as session:
+        try:
+            session.add(User(username=username, password=password))
+            session.commit()
+            return True
+        except exc.IntegrityError:
+            # template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            # message = template.format(type(ex).__name__, ex.args)
+            session.rollback()
+            return False
 
-# user = User(1, "aku", "salasana")
-# session.add(user)
-# session.commit()
+def login(username, password):
+    with session_maker() as session:
+        user = session.query(User).filter_by(username=username).first()
+        return user and user.password == password
 
-# user2 = User(2, "mikki", "salasana")
-# user3 = User(3, "roope", "salasana")
-# user4 = User(4, "iines", "salasana")
+def show_user(username):
+    with session_maker() as session:
+        user = session.query(User).filter_by(username=username).first()
+        if user:
+            return user.username, user.quotes
+        return False
 
-# session.add(user2)
-# session.add(user3)
-# session.add(user4)
-# session.commit()
+def add_quote(username, quote):
+    with session_maker() as session:
+        test = session.query(Quote).filter_by(content=quote[1]).first()
+        if test:
+            return None
+        user = session.query(User).filter_by(username=username).first()
+        new_quote = Quote(content=quote[0], author=quote[1], tags=quote[2])
+        user.quotes.append(new_quote)
+        session.add(new_quote)
+        session.commit()
+        return True
 
-# users = session.query(User).all()
-# print(users)
-
-# from datetime import datetime
-
-# from sqlalchemy import Column, Integer, String, DateTime, create_engine
-
-# from sqlalchemy.orm import declarative_base, sessionmaker
-
-# Base = declarative_base()
-
-# class UserModel(Base):
-#     __tablename__ = 'user'
-#     id = Column(Integer, primary_key=True)
-#     name = Column(String, nullable=False)
-#     created = Column(DateTime, default=datetime.utcnow)
-
-# engine = create_engine("sqlite:///mydb.db", echo=True)
-
-# Base.metadata.create_all(bind=engine)
-
-# Session = sessionmaker(bind=engine)
-# session = Session()
+def initialize_database():
+    Base.metadata.create_all(engine)
