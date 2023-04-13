@@ -1,15 +1,112 @@
 import unittest
+from unittest.mock import patch
+import json
+import requests
 import app_functions
-
+from db_models import delete_user, delete_quote
 
 class TestAppFunctions(unittest.TestCase):
     def setUp(self):
-        print("setup")
+        self.username = "account"
+        self.password = "password"
+        self.quote = ['some random quote', 'author', "('random-quotes',)"]
+        delete_user(self.username)
+        delete_quote(self.quote[0])
+
+    def register(self):
+        return app_functions.AppFunctions().register(self.username, self.password)
 
     def test_get_new_quote_returns_something(self):
         result = app_functions.AppFunctions().get_new_quote()
         content_length = len(result[0])
         self.assertTrue(content_length > 0)
 
+    def test_get_new_quote_handles_timeout(self):
+        with patch("app_functions.requests.get", side_effect=requests.exceptions.Timeout):
+            result = app_functions.AppFunctions().get_new_quote()
+            self.assertEqual(result, "Error: Connection timeout")
 
-#TestAppFunctions().test_get_new_quote_returns_something()
+    def test_get_new_quote_returns_connection_error(self):
+        with patch("app_functions.requests.get", side_effect=requests.exceptions.ConnectionError):
+            result = app_functions.AppFunctions().get_new_quote()
+            self.assertEqual(result, "Error: Connection error")
+
+    def test_get_new_quote_returns_http_error(self):
+        with patch("app_functions.requests.get", side_effect=requests.exceptions.HTTPError):
+            result = app_functions.AppFunctions().get_new_quote()
+            self.assertEqual(result, "Error: ")
+
+    def test_get_new_quote_returns_json_decode_error(self):
+        with patch("app_functions.requests.get",
+                    side_effect=json.JSONDecodeError("test message", "test doc", 0)):
+            result = app_functions.AppFunctions().get_new_quote()
+            self.assertIn("Error decoding JSON: test message:", result)
+
+    def test_get_new_quote_returns_key_error(self):
+        with patch("app_functions.requests.get") as mock_get:
+            mock_response = mock_get.return_value
+            mock_response.json.return_value = {}
+            result = app_functions.AppFunctions().get_new_quote()
+            self.assertEqual("KeyError: Some part of the data is missing", result)
+
+    def test_response_gets_full_data(self):
+        with patch("app_functions.requests.get") as mock_get:
+            mock_response = mock_get.return_value
+            mock_response.json.return_value = {
+                "content": "",
+                "author": "Test",
+                "tags": ["Something"]
+            }
+            result = app_functions.AppFunctions().get_new_quote()
+            self.assertEqual("KeyError: Some part of the data is empty", result)
+
+    def test_register_successful(self):
+        result = self.register()
+        self.assertTrue(result[0])
+        delete_user(self.username)
+
+    def test_register_fails_if_user_already_exists(self):
+        self.register()
+        result = app_functions.AppFunctions().register(self.username, self.password)
+        self.assertFalse(result[0])
+
+    def test_register_fails_wihout_proper_password(self):
+        result = app_functions.AppFunctions().register(self.username, "")
+        self.assertFalse(result)
+
+    def test_register_fails_without_proper_username(self):
+        result = app_functions.AppFunctions().register("", self.password)
+        self.assertFalse(result)
+
+    def test_login_successful(self):
+        self.register()
+        result = app_functions.AppFunctions().login(self.username, self.password)
+        self.assertTrue(result)
+
+    def test_login_fails_with_false_password(self):
+        self.register()
+        result = app_functions.AppFunctions().login(self.username, "")
+        self.assertFalse(result[0])
+
+    def test_login_fails_with_false_username(self):
+        self.register()
+        result = app_functions.AppFunctions().login("", self.password)
+        self.assertFalse(result[0])
+
+    def test_add_quote_successful(self):
+        self.register()
+        result = app_functions.AppFunctions().add_quote(self.username, self.quote)
+        self.assertTrue(result)
+
+    def test_add_quote_fails_without_username(self):
+        result = app_functions.AppFunctions().add_quote("", self.quote)
+        self.assertIsNone(result)
+
+    def test_show_user_success(self):
+        self.register()
+        result = app_functions.AppFunctions().show_user(self.username)
+        self.assertTrue(result)
+
+    def test_show_user_fail(self):
+        result = app_functions.AppFunctions().show_user(self.username)
+        self.assertFalse(result)

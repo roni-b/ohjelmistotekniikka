@@ -72,6 +72,24 @@ def add_quote(username, quote):
         session.commit()
         return True
 
+def delete_user(username):
+    with session_maker() as session:
+        user = session.query(User).filter_by(username=username).first()
+        if user:
+            session.delete(user)
+            session.commit()
+            return True
+        return False
+
+def delete_quote(content):
+    with session_maker() as session:
+        quote = session.query(Quote).filter(Quote.content == content).first()
+        if quote:
+            session.delete(quote)
+            session.commit()
+            return True
+        return False
+
 def initialize_database():
     Base.metadata.create_all(engine)
 
