@@ -18,7 +18,7 @@ def coverage_report(ctx):
     
 @task
 def build(ctx):
-    ctx.run("python3 src/build.py", pty=True)
+    ctx.run("python3 src/db_models.py", pty=True)
 
 @task
 def lint(ctx):
