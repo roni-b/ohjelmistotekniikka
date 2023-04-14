@@ -106,12 +106,14 @@ class GetQuoteButton(ttk.Button):
 
     def update_quote(self):
         new_quote = AppFunctions().get_new_quote()
-        self.content.set(new_quote[0])
-        self.author.set(new_quote[1])
-        self.tags.set(new_quote[2])
-        self.text.grid()
-        self.options.grid()
-
+        try:
+            self.content.set(new_quote[0])
+            self.author.set(new_quote[1])
+            self.tags.set(new_quote[2])
+            self.text.grid()
+            self.options.grid()
+        except:
+            print(new_quote)
 
 class QuoteText(tk.Frame):
     def __init__(self, parent, response_text, response_author, response_tags):
