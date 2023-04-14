@@ -40,7 +40,7 @@ class AppFunctions:
             author = data["author"]
             tags = data["tags"]
             if not all([content, author, tags]):
-                return "KeyError: Some part of the data is empty"
+                return "KeyError: Some part of the response data is empty"
             return content, author, tags
         except ValueError as err:
             return f"Error: {err}"
