@@ -18,28 +18,34 @@ class AppFunctions:
             return True, "register successful"
         return False, "register failed"
 
-    def get_new_quote(self):
-        api_url = 'https://api.quotable.io/random'
+    def get_api_response(self, api_url):
         try:
             response = requests.get(api_url, timeout=5)
             response.raise_for_status()
-            data = response.json()
+            return response.json()
+        except requests.exceptions.Timeout as exc:
+            raise ValueError("Connection timeout") from exc
+        except requests.exceptions.ConnectionError as exc:
+            raise ValueError("Connection error") from exc
+        except requests.exceptions.HTTPError as err:
+            raise ValueError(f"{err}") from err
+        except json.JSONDecodeError as err:
+            raise ValueError(f"Error decoding JSON: {err}") from err
+
+    def get_new_quote(self):
+        api_url = 'https://api.quotable.io/random'
+        try:
+            data = self.get_api_response(api_url)
             content = data["content"]
             author = data["author"]
             tags = data["tags"]
             if not all([content, author, tags]):
                 return "KeyError: Some part of the data is empty"
             return content, author, tags
-        except requests.exceptions.Timeout:
-            return "Error: Connection timeout"
-        except requests.exceptions.ConnectionError:
-            return "Error: Connection error"
-        except requests.exceptions.HTTPError as err:
+        except ValueError as err:
             return f"Error: {err}"
-        except json.JSONDecodeError as err:
-            return f"Error decoding JSON: {err}"
         except KeyError:
-            return "KeyError: Some part of the data is missing"
+            return "KeyError: The response data is missing"
 
     def show_user(self, username):
         return db_models.show_user(username)
@@ -53,4 +59,3 @@ class AppFunctions:
             map(lambda x: x if x not in bad_chars else '', quote[2]))
         new = [quote[0], quote[1], filtered]
         return db_models.add_quote(username, new)
-    

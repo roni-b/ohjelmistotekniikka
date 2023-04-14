@@ -43,8 +43,6 @@ def register(username, password):
             session.commit()
             return True
         except exc.IntegrityError:
-            # template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            # message = template.format(type(ex).__name__, ex.args)
             session.rollback()
             return False
 
