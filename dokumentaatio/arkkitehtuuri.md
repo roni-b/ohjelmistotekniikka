@@ -2,7 +2,7 @@
 
 ![Kuvaus tietorakenteesta](https://user-images.githubusercontent.com/104189902/232098366-10bafba8-1d7a-40ca-b17e-573a0743ea8a.png)
 
-Luokat User ja Quote db_functions tiedostossa määrittelevät sovelluksen tietokantataulut
+Luokat User ja Quote määrittelevät db_functions tiedostossa sovelluksen tietokantataulut
 
 ![Screenshot from 2023-04-14 19-25-54](https://user-images.githubusercontent.com/104189902/232102272-72021b44-33d3-4576-b20c-c240aef6527f.png)
 
