@@ -24,30 +24,30 @@ class TestAppFunctions(unittest.TestCase):
     def test_get_new_quote_handles_timeout(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.Timeout):
             result = app_functions.AppFunctions().get_new_quote()
-            self.assertEqual(result, "Error: Connection timeout")
+            self.assertEqual((True, "Error: Connection timeout"), result)
 
     def test_get_new_quote_returns_connection_error(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.ConnectionError):
             result = app_functions.AppFunctions().get_new_quote()
-            self.assertEqual(result, "Error: Connection error")
+            self.assertEqual((True, "Error: Connection error"), result)
 
     def test_get_new_quote_returns_http_error(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.HTTPError):
             result = app_functions.AppFunctions().get_new_quote()
-            self.assertEqual(result, "Error: ")
+            self.assertEqual((True, "Error: "), result)
 
     def test_get_new_quote_returns_json_decode_error(self):
         with patch("app_functions.requests.get",
                     side_effect=json.JSONDecodeError("test message", "test doc", 0)):
             result = app_functions.AppFunctions().get_new_quote()
-            self.assertIn("Error decoding JSON: test message:", result)
+            self.assertIn("Error decoding JSON: test message:", result[1])
 
     def test_get_new_quote_returns_key_error(self):
         with patch("app_functions.requests.get") as mock_get:
             mock_response = mock_get.return_value
             mock_response.json.return_value = {}
             result = app_functions.AppFunctions().get_new_quote()
-            self.assertEqual("KeyError: The response data is missing", result)
+            self.assertEqual((True, "The response data is missing"), result)
 
     def test_response_gets_full_data_from_api(self):
         with patch("app_functions.requests.get") as mock_get:
@@ -58,7 +58,7 @@ class TestAppFunctions(unittest.TestCase):
                 "tags": ["Something"]
             }
             result = app_functions.AppFunctions().get_new_quote()
-            self.assertEqual("KeyError: Some part of the response data is empty", result)
+            self.assertEqual((True, "Some part of the response data is empty"), result)
 
     def test_register_successful(self):
         result = self.register()

@@ -40,12 +40,12 @@ class AppFunctions:
             author = data["author"]
             tags = data["tags"]
             if not all([content, author, tags]):
-                return "KeyError: Some part of the response data is empty"
+                return (True, "Some part of the response data is empty")
             return content, author, tags
         except ValueError as err:
-            return f"Error: {err}"
+            return (True, f"Error: {err}")
         except KeyError:
-            return "KeyError: The response data is missing"
+            return (True, "The response data is missing")
 
     def show_user(self, username):
         return db_models.show_user(username)

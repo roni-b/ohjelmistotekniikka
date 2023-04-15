@@ -55,7 +55,7 @@ def show_user(username):
     with session_maker() as session:
         user = session.query(User).filter_by(username=username).first()
         if user:
-            return user.username, user.quotes
+            return user.uid, user.username, user.quotes
         return False
 
 def add_quote(username, quote):
