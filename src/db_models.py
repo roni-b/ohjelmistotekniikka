@@ -55,7 +55,13 @@ def show_user(username):
     with session_maker() as session:
         user = session.query(User).filter_by(username=username).first()
         if user:
-            return user.uid, user.username, user.quotes
+            quotes = []
+            for quote in user.quotes:
+                quotes.append({'id':quote.qid,
+                                'content': quote.content,
+                                'author': quote.author,
+                                'tags': quote.tags})
+            return {'uid': user.uid, 'username': user.username, 'quotes': quotes}
         return False
 
 def add_quote(username, quote):

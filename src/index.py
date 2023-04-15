@@ -89,7 +89,10 @@ class App(ttk.Window):
 
     def refresh_user_page(self):
         response = AppFunctions().show_user(self.data.username.get())
-        self.data.user_content.set(response)
+        parsed = ""
+        for i in response["quotes"]:
+            parsed += f"id:{i['id']}\n{i['content']}\n{i['author']}\n\n"
+        self.data.user_content.set(parsed)
 
 class GetQuoteButton(ttk.Button):
     def __init__(self, parent, response_text, response_author, response_tags, options, text):
@@ -194,6 +197,7 @@ class QuoteOptions(tk.Frame):
 class LoginForm(ttk.Frame):
     def __init__(self, parent, username, password, reg_or_log, user_page, content):
         super().__init__(master=parent)
+        self.app_instance = parent
         self.username = username
         self.password = password
         self.reg_or_log = reg_or_log
@@ -246,9 +250,7 @@ class LoginForm(ttk.Frame):
                 response = AppFunctions().login(self.username.get(), self.password.get())
                 if response[0]:
                     self.grid_remove()
-                    data = AppFunctions().show_user(self.username.get())
-                    if data:
-                        self.user_content.set(data)
+                    self.app_instance.refresh_user_page()
                     self.user_page.grid()
                 messagebox.showinfo(title="Note", message=response[1])
         else:
