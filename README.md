@@ -1,7 +1,7 @@
 # Random Quote App
-kuvaus 
+Sovelluksen idea on näyttää lyhyitä satunnaisia lainauksia eri henkilöiltä, joita rekisteröitynyt käyttäjä voi tallentaa tietokantaan. Sovellus on Ohjelmistotekniikka-kurssin harjoitustyö.
 
-[relase](https://github.com/roni-b/ohjelmistotekniikka/releases/tag/viikko5)
+[Relase](https://github.com/roni-b/ohjelmistotekniikka/releases/tag/viikko5)
 
 ### Dokumentaatio
 
