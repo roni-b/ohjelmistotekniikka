@@ -12,6 +12,7 @@ class Data:
         self.password = tk.StringVar()
         self.reg_or_log = tk.BooleanVar(value=False)
         self.user_content = tk.StringVar()
+        self.search_var = tk.StringVar()
         self.hide_text = tk.StringVar(value="Hide quote")
 
 class Widgets:
@@ -39,7 +40,11 @@ class Widgets:
             self.quote_options,
             self.quote_text
         )
-        self.user_page = UserPage(master, data.user_content)
+        self.user_page = UserPage(
+            master,
+            data.user_content,
+            data.search_var
+        )
         self.login_form = LoginForm(
             master, data.username,
             data.password,
@@ -72,6 +77,9 @@ class App(ttk.Window):
         # widgets
         self.widgets = Widgets(self, self.data)
 
+        #tracing
+        self.data.search_var.trace("w", self.search_handler)
+
         self.mainloop()
 
     def _center_position(self, width, height):
@@ -91,8 +99,25 @@ class App(ttk.Window):
         response = AppFunctions().show_user(self.data.username.get())
         parsed = ""
         for i in response["quotes"]:
-            parsed += f"id:{i['id']}\n{i['content']}\n{i['author']}\n\n"
+            tags = str(i['tags']).strip(",")
+            parsed += f"id:{i['id']}\ntags: {tags}\n{i['content']}\n{i['author']}\n\n"
         self.data.user_content.set(parsed)
+
+    def sort_user_page(self):
+        response = AppFunctions().show_user(self.data.username.get())
+        parsed = ""
+        search_term = self.data.search_var.get().lower()
+        for i in response["quotes"]:
+            author = i['author'].lower()
+            content = i['content'].lower()
+            tags = str(i['tags'].lower()).strip(",")
+            qid = i['id']
+            if (search_term in author) or (search_term in content) or (search_term in str(qid)) or (search_term in tags):
+                parsed += f"id:{qid}\ntags: {tags}\n{content}\n{author}\n\n"
+        self.data.user_content.set(parsed)
+   
+    def search_handler(self, *args):
+        self.sort_user_page()
 
 class GetQuoteButton(ttk.Button):
     def __init__(self, parent, response_text, response_author, response_tags, options, text):
@@ -114,7 +139,9 @@ class GetQuoteButton(ttk.Button):
         else:
             self.content.set(new_quote[0])
             self.author.set(new_quote[1])
-            self.tags.set(new_quote[2])
+            bad_chars = ['"', "'", '{', '}', '[', ']']
+            filtered_tags = [tag for tag in new_quote[2] if tag not in bad_chars]
+            self.tags.set(', '.join(filtered_tags))
             self.text.grid()
             self.options.grid()
 
@@ -190,9 +217,10 @@ class QuoteOptions(tk.Frame):
             self.hide_text.set("Hide quote")
 
     def save_quote(self):
-        AppFunctions().add_quote(self.username.get(), [
-            self.response_text.get(), self.response_author.get(), self.response_tags.get()])
-        self.app_instance.refresh_user_page()
+        if self.username.get():
+            AppFunctions().add_quote(self.username.get(), [
+                self.response_text.get(), self.response_author.get(), self.response_tags.get()])
+            self.app_instance.refresh_user_page()
 
 class LoginForm(ttk.Frame):
     def __init__(self, parent, username, password, reg_or_log, user_page, content):
@@ -260,7 +288,7 @@ class LoginForm(ttk.Frame):
 
 
 class UserPage(ttk.Frame):
-    def __init__(self, parent, content):
+    def __init__(self, parent, content, search_var):
         super().__init__(master=parent)
         self.app_instance = parent
         self.grid(row=0, column=0, rowspan=4, columnspan=1,
@@ -271,8 +299,13 @@ class UserPage(ttk.Frame):
         self.label = ttk.Label(self, text="User page")
         self.label.grid(row=0, column=0, sticky="nw")
         self.logout_button = ttk.Button(
-            self, text="Logout", command=self.handle_logout)
+            self, text="Logout", command=lambda: self.app_instance.logout_function())
         self.logout_button.grid(row=0, column=0, sticky="ne")
+
+        self.search_entry = ttk.Entry(self, textvariable=search_var)
+        self.search_entry.grid(column=0, row=0, sticky="n")
+        self.search_entry.insert(0, "Search quote")
+        self.search_entry.bind("<FocusIn>", self.on_entry_focusin)
 
         self.canvas = tk.Canvas(self, bg="#FFFFFF")
         self.canvas.grid(row=1, column=0, sticky="nsew")
@@ -305,9 +338,10 @@ class UserPage(ttk.Frame):
         else:
             return
         self.canvas.yview_scroll(direction, "units")
-
-    def handle_logout(self):
-        self.app_instance.logout_function()
+    
+    def on_entry_focusin(self, event):
+        if self.search_entry.get() == "Search quote":
+            self.search_entry.delete(0, tk.END)
 
 if __name__ == '__main__':
     App()

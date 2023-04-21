@@ -54,8 +54,5 @@ class AppFunctions:
         print(quote)
         if not username:
             return None
-        bad_chars = ['"', "'", '(', ')']
-        filtered = ''.join(
-            map(lambda x: x if x not in bad_chars else '', quote[2]))
-        new = [quote[0], quote[1], filtered]
+        new = [quote[0], quote[1], quote[2]]
         return db_models.add_quote(username, new)
