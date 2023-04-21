@@ -18,3 +18,10 @@
 - Luotu tietokantaan monta moneen -suhde käyttäjän ja lainausten välille
 - Parannettu koodin laatua Pylintin avulla
 - Testattu tähänastinen sovelluslogiikka ja saavutettu 100% haarautumakattavuus
+
+
+## Viikko 5
+
+- Tehty hakutoiminto, jolla käyttäjä voi hakea tietokannasta tietyn lainauksen tai järjestää ne vaikka kategorian mukaan
+- Muokattu lainausten näyttämistä paremmaksi
+- Refaktoroitu koodia hieman
