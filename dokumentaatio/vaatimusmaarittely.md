@@ -8,18 +8,22 @@ Yksi käyttäjärooli, eli normaali käyttäjä. Myöhemmin saatetaan lisätä p
 
 ## Perusversion tarjoama toiminnallisuus
 
-Ennen kirjautumista
+*Toteutetut toiminnot merkitty :heavy_check_mark:*
+
+**Ennen kirjautumista**
 - :heavy_check_mark: Käyttäjä voi luoda uniikin käyttäjätunnuksen
 - :heavy_check_mark: Käyttäjä voi kirjautua sovellukseen kirjautumislomakkeen avulla
 - :heavy_check_mark: Sovellus tarkistaa, että tunnus ja salasana täsmäävät
 
-Kirjautumisen jälkeen
+**Kirjautumisen jälkeen**
 
 - :heavy_check_mark: Käyttäjä näkee tallennetut lainaukset ja painikkeen mistä saa haettua uuden lainauksen
 - :heavy_check_mark: Uuden lainauksen mukana toiminto jolla sen saa tallennettua tietokantaan tai piilotettua näkyvistä
 - :heavy_check_mark: Mahdollisuus kirjautua ulos
 
-Jatkokehitysideoita
+**Jatkokehitysideoita**
 
-- :x: Lainausten järjestäminen jollain tavalla
-- :x: Hakutoiminto tietyn lainauksen tai sen tekijän etsimiseen
+- :heavy_check_mark: Lainausten järjestäminen jollain tavalla
+- :heavy_check_mark: Hakutoiminto tietyn lainauksen tai sen tekijän etsimiseen
+
+*Hakutoiminnolla voi myös järjestää lainaukset, ei erillistä toimintoa*
