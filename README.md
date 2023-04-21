@@ -12,15 +12,15 @@
 
 ### Asennus
 
-*Asenna riippuvuudet*
+Asenna riippuvuudet
 ```bash
 poetry install
 ```
-*Alusta tietokanta*
+Alusta tietokanta
 ```bash
 poetry run invoke build
 ```
-*Käynnistä sovellus*
+Käynnistä sovellus
 ```bash
 poetry run invoke start
 ```
