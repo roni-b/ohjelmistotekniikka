@@ -1,16 +1,15 @@
 # Random Quote App
 Sovelluksen idea on näyttää lyhyitä satunnaisia lainauksia eri henkilöiltä, joita rekisteröitynyt käyttäjä voi tallentaa tietokantaan. Sovellus on Ohjelmistotekniikka-kurssin harjoitustyö.
 
-[Relase](https://github.com/roni-b/ohjelmistotekniikka/releases/tag/viikko5)
+[Uusin relase](https://github.com/roni-b/ohjelmistotekniikka/releases/tag/viikko5)
+
+[Suora latauslinkki](https://github.com/roni-b/ohjelmistotekniikka/archive/refs/tags/viikko5.zip)
 
 ### Dokumentaatio
 
 - [vaatimusmäärittely](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/vaatimusmaarittely.md)
-
 - [tuntikirjanpito](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/tuntikirjanpito.md)
-
 - [changelog](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/changelog.md)
-
 - [arkkitehtuuri](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/arkkitehtuuri.md)
 
 ### Asennus
