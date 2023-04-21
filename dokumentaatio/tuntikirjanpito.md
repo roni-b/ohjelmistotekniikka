@@ -12,4 +12,6 @@
 | 12.4. | 4    | Koodin refaktorointi |
 | 13.4. | 4    | Testien tekeminen |
 | 14.4. | 1    | Dokumentaatio |
-| yht. | 27  |  |
+| 15.4. | 2    | Käyttöliittymän toimintojen lisäys |
+| 16.4. | 1    | Dokumentaatio |
+| yht. | 30  |  |
