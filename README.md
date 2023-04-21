@@ -12,14 +12,17 @@
 
 ### Asennus
 
+*Asenna riippuvuudet*
 ```bash
-Step 1: poetry install
+poetry install
 ```
+*Alusta tietokanta*
 ```bash
-Step 2: poetry run invoke build
+poetry run invoke build
 ```
+*Käynnistä sovellus*
 ```bash
-Step 3: poetry run invoke start
+poetry run invoke start
 ```
-**Sovelluksen toiminta on testattu Pythonin versiolla 3.11.2 ja Poetryn versiolla 1.4.1**
+*Sovelluksen toiminta on testattu Pythonin versiolla 3.11.2 ja Poetryn versiolla 1.4.1*
 
