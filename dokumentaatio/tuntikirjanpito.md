@@ -14,4 +14,5 @@
 | 14.4. | 1    | Dokumentaatio |
 | 15.4. | 2    | Käyttöliittymän toimintojen lisäys |
 | 16.4. | 1    | Dokumentaatio |
-| yht. | 30  |  |
+| 21.4. | 2    | Dokumentaatio |
+| yht. | 32  |  |
