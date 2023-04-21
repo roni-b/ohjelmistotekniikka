@@ -18,3 +18,12 @@ Käyttöliittymän luokka App on sovelluksen pääluokka ja se perii ttk.Window-
 Sovelluksen osa-alueet, kuten kirjautumislomake on jaettu widgetteihin/komponentteihin jotka toteuttavat aina jonkin ominaisuuden. Komponentit käyttävät luokassa Data määriteltyjä muuttujia tiedon tallentamiseen, komponentin päivittämiseen ja tiedon välittämiseen muille komponenteille sekä App-luokalle. Lisäksi hakutoimintoa varten on "tracing" joka siis seuraa haku-merkkijonomuuttujan tilaa ja aina kun muuttujaa muokataan, niin se kutsuu käyttäjän sivun päivittävää metodia.
 
 App piilottaa osan komponenteista sovelluksen käynnistyksessä ja komponentit määrittelevät ne näkyviin tarvittaessa. App sisältää lisäksi metodit näytön keskikohdan määrittämiseen, uloskirjautumiseen, käyttäjän sivun päivittämiseen ja hakutoiminnon tapahtumankäsittelyyn. TkInter layoutin tekemisessä on käytetty grid-metodia. Käyttöliittymäkoodista kutsutaan aina tarvittaessa app_functions-tiedoston metodeja, koska siellä sijaitsee sovelluslogiikka.
+
+## Sekvenssikaaviot 
+
+Alla on kuvattuna sovelluksen päätoiminnallisuudet sekvenssikaavioina:
+
+
+![Screenshot from 2023-04-21 15-58-23](https://user-images.githubusercontent.com/104189902/233642012-0b0095b9-6055-47c3-b4cf-1363bfd9b6bd.png)
+
+Kun käyttäjä klikkaa uuden lainauksen hakupainikkeesta, käyttöliittymä kutsuu sovelluslogiikasta uuden lainauksen hakumetodia `get_new_quote` . Sitten `get_api_response` metodi hakee kyseisestä rajapinnasta uuden lainauksen ja palauttaa saamansa datan `get_new_quote` metodille JSON-muodossa, joka vuorostaan palauttaa sen käyttöliittymälle tuplena: *content, author, tags* .
