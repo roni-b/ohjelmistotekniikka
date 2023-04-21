@@ -24,6 +24,6 @@ App piilottaa osan komponenteista sovelluksen käynnistyksessä ja komponentit m
 Alla on kuvattuna sovelluksen päätoiminnallisuudet sekvenssikaavioina:
 
 
-![Screenshot from 2023-04-21 15-58-23](https://user-images.githubusercontent.com/104189902/233642012-0b0095b9-6055-47c3-b4cf-1363bfd9b6bd.png)
+![Screenshot from 2023-04-21 16-21-10](https://user-images.githubusercontent.com/104189902/233646579-f17151e4-4aa9-46e4-9c12-51a49357bac5.png)
 
-Kun käyttäjä klikkaa uuden lainauksen hakupainikkeesta, käyttöliittymä kutsuu sovelluslogiikasta uuden lainauksen hakumetodia `get_new_quote` . Sitten `get_api_response` metodi hakee kyseisestä rajapinnasta uuden lainauksen ja palauttaa saamansa datan `get_new_quote` metodille JSON-muodossa, joka vuorostaan palauttaa sen käyttöliittymälle tuplena: *content, author, tags* .
+Kun käyttäjä klikkaa uuden lainauksen hakupainikkeesta, käyttöliittymäkoodi kutsuu sovelluslogiikasta uuden lainauksen hakumetodia `get_new_quote` . Sitten `get_api_response` metodi hakee kyseisestä rajapinnasta uuden lainauksen ja palauttaa saamansa datan `get_new_quote` metodille JSON-muodossa, joka vuorostaan palauttaa sen käyttöliittymälle tuplena: *content, author, tags* . Saatuaan datan, käyttöliittymä asettaa muuttujiinsa datan ja määrittää `.grid` komennoilla uuden lainauksen näkyväksi.
