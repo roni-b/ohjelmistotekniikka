@@ -25,5 +25,6 @@ Yksi käyttäjärooli, eli normaali käyttäjä. Myöhemmin saatetaan lisätä p
 
 - :heavy_check_mark: Lainausten järjestäminen jollain tavalla
 - :heavy_check_mark: Hakutoiminto tietyn lainauksen tai sen tekijän etsimiseen
+- :heavy_check_mark: Uusien lainausten hakeminen tietystä kategoriasta
 
 *Hakutoiminnolla voi myös järjestää lainaukset, ei erillistä toimintoa*
