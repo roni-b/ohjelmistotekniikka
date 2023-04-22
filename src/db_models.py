@@ -31,7 +31,7 @@ class Quote(Base):
     def __repr__(self):
         return f"quote: {self.qid} {self.content} {self.author} {self.tags}"
 
-engine = create_engine('sqlite:///mydb.db', echo=True)
+engine = create_engine('sqlite:///mydb.db')
 
 session_maker = sessionmaker(bind=engine)
 
