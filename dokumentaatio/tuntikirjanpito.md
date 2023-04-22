@@ -15,4 +15,5 @@
 | 15.4. | 2    | Käyttöliittymän toimintojen lisäys |
 | 16.4. | 1    | Dokumentaatio |
 | 21.4. | 2    | Dokumentaatio |
-| yht. | 32  |  |
+| 21.4. | 1    | Testit |
+| yht. | 33  |  |
