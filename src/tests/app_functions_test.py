@@ -10,6 +10,7 @@ class TestAppFunctions(unittest.TestCase):
         self.username = "account"
         self.password = "password"
         self.quote = ['some random quote', 'author', "('random-quotes',)"]
+        self.category = "All"
         delete_user(self.username)
         delete_quote(self.quote[0])
 
@@ -17,48 +18,73 @@ class TestAppFunctions(unittest.TestCase):
         return app_functions.AppFunctions().register(self.username, self.password)
 
     def test_get_new_quote_returns_something(self):
-        result = app_functions.AppFunctions().get_new_quote()
+        result = app_functions.AppFunctions().get_new_quote(self.category)
         content_length = len(result[0])
         self.assertTrue(content_length > 0)
 
     def test_get_new_quote_handles_timeout(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.Timeout):
-            result = app_functions.AppFunctions().get_new_quote()
+            result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Error: Connection timeout"), result)
 
     def test_get_new_quote_returns_connection_error(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.ConnectionError):
-            result = app_functions.AppFunctions().get_new_quote()
+            result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Error: Connection error"), result)
 
     def test_get_new_quote_returns_http_error(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.HTTPError):
-            result = app_functions.AppFunctions().get_new_quote()
+            result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Error: "), result)
 
     def test_get_new_quote_returns_json_decode_error(self):
         with patch("app_functions.requests.get",
                     side_effect=json.JSONDecodeError("test message", "test doc", 0)):
-            result = app_functions.AppFunctions().get_new_quote()
+            result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertIn("Error decoding JSON: test message:", result[1])
 
     def test_get_new_quote_returns_key_error(self):
         with patch("app_functions.requests.get") as mock_get:
             mock_response = mock_get.return_value
             mock_response.json.return_value = {}
-            result = app_functions.AppFunctions().get_new_quote()
+            result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "The response data is missing"), result)
 
     def test_response_gets_full_data_from_api(self):
         with patch("app_functions.requests.get") as mock_get:
             mock_response = mock_get.return_value
-            mock_response.json.return_value = {
+            mock_response.json.return_value = [{
                 "content": "",
                 "author": "Test",
                 "tags": ["Something"]
-            }
-            result = app_functions.AppFunctions().get_new_quote()
+            }]
+            result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Some part of the response data is empty"), result)
+    
+    def test_response_returns_index_error(self):
+        with patch("app_functions.requests.get", side_effect=IndexError):
+            result = app_functions.AppFunctions().get_new_quote(self.category)
+            self.assertEqual((True, "Index error while retrieving the data"), result)
+
+    def test_response_is_not_empty_when_category_is_not_default(self):
+        result = app_functions.AppFunctions().get_new_quote("Sports")
+        content_length = len(result[0])
+        self.assertTrue(content_length > 0)
+    
+    def test_get_categories_returns_data(self):
+        result = app_functions.AppFunctions().get_categories()
+        result_length = len(result)
+        self.assertTrue(result_length > 0)
+    
+    def test_get_categories_value_error(self):
+        with patch("app_functions.requests.get", side_effect=ValueError):
+            result = app_functions.AppFunctions().get_categories()
+            self.assertEqual((True, "An error occurred while retrieving the category data from the server: "), result)
+
+    def test_get_categories_key_error(self):
+        with patch("app_functions.requests.get", side_effect=KeyError):
+            result = app_functions.AppFunctions().get_categories()
+            self.assertEqual((True, "The categories data is missing"), result)
 
     def test_register_successful(self):
         result = self.register()

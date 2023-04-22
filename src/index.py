@@ -14,6 +14,8 @@ class Data:
         self.user_content = tk.StringVar()
         self.search_var = tk.StringVar()
         self.hide_text = tk.StringVar(value="Hide quote")
+        self.category = tk.StringVar(value="Select category")
+        self.categories = tk.StringVar(value="All")
 
 class Widgets:
     def __init__(self, master, data):
@@ -30,7 +32,9 @@ class Widgets:
             data.response_tags,
             self.quote_text,
             data.hide_text,
-            data.username
+            data.username,
+            data.category,
+            data.categories
         )
         self.get_quote_button = GetQuoteButton(
             master,
@@ -38,7 +42,8 @@ class Widgets:
             data.response_author,
             data.response_tags,
             self.quote_options,
-            self.quote_text
+            self.quote_text,
+            data.category
         )
         self.user_page = UserPage(
             master,
@@ -67,10 +72,8 @@ class App(ttk.Window):
         self.bind("<Escape>", lambda event: self.quit())
         self.default_font = font.nametofont("TkDefaultFont")
         self.default_font.configure(family="Comic Sans MS", size=15, weight=font.BOLD)
-
         self.columnconfigure((0, 1), weight=1, uniform="a")
         self.rowconfigure((0, 1, 2, 3), weight=1, uniform="a")
-
         # data
         self.data = Data()
 
@@ -119,23 +122,31 @@ class App(ttk.Window):
     def search_handler(self, *args):
         self.sort_user_page()
 
+    def get_categories(self):
+        all = AppFunctions().get_categories()
+        if all[0] == True:
+            messagebox.showerror(title="Error", message=all[1])
+        else:
+            self.data.categories.set(all)
+
 class GetQuoteButton(ttk.Button):
-    def __init__(self, parent, response_text, response_author, response_tags, options, text):
+    def __init__(self, parent, response_text, response_author, response_tags, options, text, category):
         # pylint: disable=W0108
         # lambda is necessary
         super().__init__(command=lambda: self.update_quote(),
                          master=parent, text="Get random quote")
         self.options = options
         self.text = text
+        self.category = category
         self.grid(column=1, row=3, rowspan=1, sticky="nsew", padx=10, pady=10)
         self.content = response_text
         self.author = response_author
         self.tags = response_tags
 
     def update_quote(self):
-        new_quote = AppFunctions().get_new_quote()
+        new_quote = AppFunctions().get_new_quote(self.category.get())
         if new_quote[0] == True:
-            messagebox.showinfo(title="Note", message=new_quote[1])
+            messagebox.showerror(title="Error", message=new_quote[1])
         else:
             self.content.set(new_quote[0])
             self.author.set(new_quote[1])
@@ -148,32 +159,55 @@ class GetQuoteButton(ttk.Button):
 class QuoteText(tk.Frame):
     def __init__(self, parent, response_text, response_author, response_tags):
         super().__init__(master=parent)
-        self.grid(column=1, row=0, rowspan=2, columnspan=1,
-                  sticky="ns", padx=10, pady=10)
-        self.rowconfigure(0, weight=2, uniform="b")
-        self.rowconfigure(1, weight=1, uniform="b")
-        self.rowconfigure(2, weight=1, uniform="b")
-        self.rowconfigure(3, weight=1, uniform="b")
-        text_label = ttk.Label(
-            self,
+        self.grid(column=1, row=0, rowspan=3, columnspan=1,
+                  sticky="ns", padx=10, pady=20)
+        self.rowconfigure(0, weight=1, uniform="b")
+        self.rowconfigure(1, weight=2, uniform="b")
+        self.rowconfigure(2, weight=2, uniform="b")
+        self.rowconfigure(3, weight=2, uniform="b")
+        self.rowconfigure(4, weight=2, uniform="b")
+        self.canvas = tk.Canvas(self, bg="#FFFFFF")
+        self.canvas.grid(row=1, column=1, rowspan=2, sticky="nsew")
+        self.content_frame = ttk.Frame(self.canvas)
+        self.content_frame.bind("<Configure>", lambda event: self.canvas.configure(
+            scrollregion=self.canvas.bbox("all")))
+        self.canvas.create_window(
+            (0, 0), window=self.content_frame, anchor="nw")
+
+        self.text_label = ttk.Label(
+            self.content_frame,
             textvariable=response_text,
             anchor="center",
             justify="center",
             wraplength=350,
+            width=23,
             font=("Comic Sans MS", 20)
         )
-        text_label.grid(row=0, column=1, rowspan=2, sticky="nsew")
+
+        self.text_label.pack()
+        self.text_label.bind("<Button-4>", self._on_mousewheel)
+        self.text_label.bind("<Button-5>", self._on_mousewheel)
+
         author_label = ttk.Label(
             self,
             textvariable=response_author,
             font="Calibri 20 bold",
         )
-        author_label.grid(row=2, column=1)
+        author_label.grid(row=3, column=1)
         tag_label = ttk.Label(
             self,
             textvariable=response_tags,
         )
-        tag_label.grid(row=3, column=1)
+        tag_label.grid(row=4, column=1, sticky="n")
+    
+    def _on_mousewheel(self, event):
+        if event.num == 4:
+            direction = -1
+        elif event.num == 5:
+            direction = 1
+        else:
+            return
+        self.canvas.yview_scroll(direction, "units")
 
 
 class QuoteOptions(tk.Frame):
@@ -184,7 +218,9 @@ class QuoteOptions(tk.Frame):
                 response_tags,
                 text_widget,
                 hide_text,
-                username):
+                username,
+                category,
+                categories):
         super().__init__(master=parent)
         self.app_instance = parent
         self.text_widget = text_widget
@@ -193,21 +229,31 @@ class QuoteOptions(tk.Frame):
         self.response_author = response_author
         self.response_tags = response_tags
         self.hide_text = hide_text
-        self.grid(column=1, row=2)
+        self.category = category
+        self.categories = categories
+        self.grid(column=1, row=2, padx=10, sticky="s")
         self.btn_frame = ttk.Frame(self)
         self.btn_frame.grid(column=1, row=2)
         self.btn_frame.columnconfigure(0, weight=1, uniform="b")
         self.btn_frame.columnconfigure(1, weight=1, uniform="b")
-        self.btn_frame.columnconfigure(2, weight=1, uniform="b")
+        self.btn_frame.columnconfigure(2, weight=2, uniform="b")
         self.button1 = ttk.Button(
             self.btn_frame, text="Save quote", command=self.save_quote)
         self.button1.grid(column=0, row=2, sticky="nsew")
         self.button2 = ttk.Button(
             self.btn_frame, textvariable=self.hide_text, command=self.show_hide)
         self.button2.grid(column=1, row=2, sticky="nsew")
-        self.button3 = ttk.Button(self.btn_frame, text="Something")
-        self.button3.grid(column=2, row=2, sticky="nsew")
-
+        self.b_label = ttk.Label(self.btn_frame, style="primary.Inverse.TLabel")
+        self.b_label.grid(column=2, row=2, sticky="nsew")
+        combo = ttk.Combobox(self.b_label,
+                            state="readonly",
+                            textvariable=self.category,
+                            style='info.TCombobox'
+                            )
+        self.app_instance.get_categories()
+        combo['values'] = 'All ' + self.categories.get()
+        #combo.bind('<<ComboboxSelected>>', lambda event: print(self.category.get()))
+        combo.place(x=10, y=6)
     def show_hide(self):
         if self.hide_text.get() == "Hide quote":
             self.hide_text.set("Show quote")

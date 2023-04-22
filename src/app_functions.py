@@ -32,13 +32,16 @@ class AppFunctions:
         except json.JSONDecodeError as err:
             raise ValueError(f"Error decoding JSON: {err}") from err
 
-    def get_new_quote(self):
-        api_url = 'https://api.quotable.io/random'
+    def get_new_quote(self, category):
+        if category in ('Select category', 'All'):
+            api_url = 'https://api.quotable.io/quotes/random'
+        else:
+            api_url = f"https://api.quotable.io/quotes/random?tags={category.lower()}"
         try:
             data = self.get_api_response(api_url)
-            content = data["content"]
-            author = data["author"]
-            tags = data["tags"]
+            content = data[0]["content"]
+            author = data[0]["author"]
+            tags = data[0]["tags"]
             if not all([content, author, tags]):
                 return (True, "Some part of the response data is empty")
             return content, author, tags
@@ -46,13 +49,30 @@ class AppFunctions:
             return (True, f"Error: {err}")
         except KeyError:
             return (True, "The response data is missing")
+        except IndexError:
+            return (True, "Index error while retrieving the data")
 
     def show_user(self, username):
         return db_models.show_user(username)
 
     def add_quote(self, username, quote):
-        print(quote)
         if not username:
             return None
         new = [quote[0], quote[1], quote[2]]
         return db_models.add_quote(username, new)
+
+    def get_categories(self):
+        api_url = 'https://api.quotable.io/tags'
+        parsed = ""
+        try:
+            data = self.get_api_response(api_url)
+            for i in data:
+                if i["quoteCount"] != 0:
+                    parsed += i["name"]+" "
+            return parsed
+        except ValueError as err:
+            return (
+                True, f"An error occurred while retrieving the category data from the server: {err}"
+                )
+        except KeyError:
+            return (True, "The categories data is missing")
