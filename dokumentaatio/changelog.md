@@ -22,6 +22,7 @@
 
 ## Viikko 5
 
-- Tehty hakutoiminto, jolla käyttäjä voi hakea tietokannasta tietyn lainauksen tai järjestää ne vaikka kategorian mukaan
-- Muokattu lainausten näyttämistä paremmaksi
+- Tehty hakutoiminto, jolla käyttäjä voi löytää tietokannasta tietyn lainauksen tai järjestää ne
+- Muokattu lainausten näyttämistä paremmaksi ja lisätty scrollausmahdollisuus myös uusille
 - Refaktoroitu koodia hieman
+- Lisätty mahdollisuus hakea uusia lainauksia kategorian mukaan
