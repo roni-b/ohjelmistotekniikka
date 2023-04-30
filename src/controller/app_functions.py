@@ -1,6 +1,6 @@
 import json
 import requests
-import db_models
+from model import db_models
 
 class AppFunctions:
     def __init__(self):

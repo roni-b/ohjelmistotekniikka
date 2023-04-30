@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, Table, exc
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
+import bcrypt
 
 Base = declarative_base()
 
@@ -31,14 +32,17 @@ class Quote(Base):
     def __repr__(self):
         return f"quote: {self.qid} {self.content} {self.author} {self.tags}"
 
-engine = create_engine('sqlite:///mydb.db')
+engine = create_engine('sqlite:///src/model/mydb.db')
 
 session_maker = sessionmaker(bind=engine)
 
 def register(username, password):
+    password_bytes = password.encode('utf-8')
+    password_salt = bcrypt.gensalt()
+    password_hash = bcrypt.hashpw(password_bytes, password_salt)
     with session_maker() as session:
         try:
-            session.add(User(username=username, password=password))
+            session.add(User(username=username, password=password_hash))
             session.commit()
             return True
         except exc.IntegrityError:
@@ -46,9 +50,10 @@ def register(username, password):
             return False
 
 def login(username, password):
+    password_bytes = password.encode('utf-8')
     with session_maker() as session:
         user = session.query(User).filter_by(username=username).first()
-        return user and user.password == password
+        return user and bcrypt.checkpw(password_bytes, user.password)
 
 def show_user(username):
     with session_maker() as session:

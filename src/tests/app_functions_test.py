@@ -17,7 +17,7 @@ class TestAppFunctions(unittest.TestCase):
     def register(self):
         return app_functions.AppFunctions().register(self.username, self.password)
 
-    def test_get_new_quote_returns_something(self):
+    def test_get_new_quote_returns_data(self):
         result = app_functions.AppFunctions().get_new_quote(self.category)
         content_length = len(result[0])
         self.assertTrue(content_length > 0)
@@ -27,30 +27,30 @@ class TestAppFunctions(unittest.TestCase):
             result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Error: Connection timeout"), result)
 
-    def test_get_new_quote_returns_connection_error(self):
+    def test_get_new_quote_handles_connection_error(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.ConnectionError):
             result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Error: Connection error"), result)
 
-    def test_get_new_quote_returns_http_error(self):
+    def test_get_new_quote_handles_http_error(self):
         with patch("app_functions.requests.get", side_effect=requests.exceptions.HTTPError):
             result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "Error: "), result)
 
-    def test_get_new_quote_returns_json_decode_error(self):
+    def test_get_new_quote_handles_json_decode_error(self):
         with patch("app_functions.requests.get",
                     side_effect=json.JSONDecodeError("test message", "test doc", 0)):
             result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertIn("Error decoding JSON: test message:", result[1])
 
-    def test_get_new_quote_returns_key_error(self):
+    def test_get_new_quote_handles_key_error(self):
         with patch("app_functions.requests.get") as mock_get:
             mock_response = mock_get.return_value
             mock_response.json.return_value = {}
             result = app_functions.AppFunctions().get_new_quote(self.category)
             self.assertEqual((True, "The response data is missing"), result)
 
-    def test_response_gets_full_data_from_api(self):
+    def test_get_new_quote_partial_data_from_api(self):
         with patch("app_functions.requests.get") as mock_get:
             mock_response = mock_get.return_value
             mock_response.json.return_value = [{
