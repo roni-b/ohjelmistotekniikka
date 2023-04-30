@@ -1,4 +1,8 @@
-## Sovelluksen rakenne
+## Arkkitehtuurikuvaus
+
+## Rakenne
+
+Ohjelman rakenne noudattaa MVC-arkkitehtuuria, jossa käyttöliittymä on eriytetty sovelluslogiikasta. Hakemistossa model sijaitsee tietokantakuvaus ja funktiot tietokannan käyttämiseen. Hakemistossa view sijaitsee käyttöliittymäkoodi ja hakemistossa controller sijaitsee sovelluslogiikka. 
 
 ![Kuvaus tietorakenteesta](https://user-images.githubusercontent.com/104189902/232098366-10bafba8-1d7a-40ca-b17e-573a0743ea8a.png)
 
