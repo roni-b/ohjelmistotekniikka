@@ -6,19 +6,22 @@ class AppFunctions:
     def __init__(self):
         pass
 
-    def login(self, username, password):
+    @staticmethod
+    def login(username, password):
         if db_models.login(username, password):
             return True, f"welcome {username}!"
         return False, "login failed"
 
-    def register(self, username, password):
+    @staticmethod
+    def register(username, password):
         if len(username) < 3 or len(password) < 3:
             return False
         if db_models.register(username, password):
             return True, "register successful"
         return False, "register failed"
 
-    def get_api_response(self, api_url):
+    @staticmethod
+    def get_api_response(api_url):
         try:
             response = requests.get(api_url, timeout=5)
             response.raise_for_status()
@@ -52,10 +55,12 @@ class AppFunctions:
         except IndexError:
             return (True, "Index error while retrieving the data")
 
-    def show_user(self, username):
+    @staticmethod
+    def show_user(username):
         return db_models.show_user(username)
 
-    def add_quote(self, username, quote):
+    @staticmethod
+    def add_quote(username, quote):
         if not username:
             return None
         new = [quote[0], quote[1], quote[2]]

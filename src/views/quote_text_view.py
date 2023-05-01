@@ -1,4 +1,5 @@
 import ttkbootstrap as ttk
+from utils import create_content_frame
 
 class QuoteText(ttk.Frame):
     def __init__(self, parent, response_text, response_author, response_tags):
@@ -6,17 +7,12 @@ class QuoteText(ttk.Frame):
         self.grid(column=1, row=0, rowspan=3, columnspan=1,
                   sticky="ns", padx=10, pady=20)
         self.rowconfigure(0, weight=1, uniform="b")
-        self.rowconfigure(1, weight=2, uniform="b")
-        self.rowconfigure(2, weight=2, uniform="b")
-        self.rowconfigure(3, weight=2, uniform="b")
-        self.rowconfigure(4, weight=2, uniform="b")
+        for i in range(1, 5):
+            self.rowconfigure(i, weight=2, uniform="b")
+
         self.canvas = ttk.Canvas(self, bg="#FFFFFF")
         self.canvas.grid(row=1, column=1, rowspan=2, sticky="nsew")
-        self.content_frame = ttk.Frame(self.canvas)
-        self.content_frame.bind("<Configure>", lambda event: self.canvas.configure(
-            scrollregion=self.canvas.bbox("all")))
-        self.canvas.create_window(
-            (0, 0), window=self.content_frame, anchor="nw")
+        self.content_frame = create_content_frame(self.canvas)
 
         self.text_label = ttk.Label(
             self.content_frame,
@@ -29,8 +25,14 @@ class QuoteText(ttk.Frame):
         )
 
         self.text_label.pack()
-        self.text_label.bind("<Button-4>", self._on_mousewheel)
-        self.text_label.bind("<Button-5>", self._on_mousewheel)
+        self.text_label.bind(
+            "<Button-4>",
+            lambda event: parent.on_mousewheel(event, self.text_label)
+        )
+        self.text_label.bind(
+            "<Button-5>",
+            lambda event: parent.on_mousewheel(event, self.text_label)
+        )
 
         author_label = ttk.Label(
             self,
@@ -43,13 +45,3 @@ class QuoteText(ttk.Frame):
             textvariable=response_tags,
         )
         tag_label.grid(row=4, column=1, sticky="n")
-    
-    def _on_mousewheel(self, event):
-        if event.num == 4:
-            direction = -1
-        elif event.num == 5:
-            direction = 1
-        else:
-            return
-        self.canvas.yview_scroll(direction, "units")
-
