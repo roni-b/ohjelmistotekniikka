@@ -30,3 +30,4 @@
 ## Viikko 6
 
 - Muokattu ohjelman pakkausrakennetta järkevämmäksi ja refaktoroitu koodia
+- Muokattu salasanan tallentamista siten, että tietokantaan tallennetaan bcryptillä laskettu hash
