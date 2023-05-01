@@ -18,4 +18,5 @@
 | 21.4. | 1    | Testit |
 | 30.4. | 2    | Koodin refaktorointi |
 | 1.5. | 2    | Koodin refaktorointi |
-| yht. | 37  |  |
+| 1.5. | 2    | Dokumentaatio |
+| yht. | 39  |  |
