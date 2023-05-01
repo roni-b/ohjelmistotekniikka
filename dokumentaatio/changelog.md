@@ -26,3 +26,7 @@
 - Muokattu lainausten näyttämistä paremmaksi ja lisätty scrollausmahdollisuus myös uusille
 - Refaktoroitu koodia hieman
 - Lisätty mahdollisuus hakea uusia lainauksia kategorian mukaan ja sille testit
+
+## Viikko 6
+
+- Muokattu ohjelman pakkausrakennetta järkevämmäksi ja refaktoroitu koodia
