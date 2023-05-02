@@ -2,7 +2,7 @@
 
 ## Rakenne
 
-Ohjelman rakenne noudattaa MVC-arkkitehtuuria, jossa käyttöliittymä on eriytetty sovelluslogiikasta. Hakemistossa model sijaitsee tietokantakuvaus ja funktiot tietokannan käyttämiseen. Hakemistossa view sijaitsee käyttöliittymäkoodi ja hakemistossa controller sijaitsee sovelluslogiikka. 
+Ohjelman rakenne noudattaa MVC-arkkitehtuuria, jossa käyttöliittymä on eriytetty sovelluslogiikasta. Alla on kuvattu ohjelman pakkausrakenne:
 
 ![Kuvaus tietorakenteesta](https://user-images.githubusercontent.com/104189902/232098366-10bafba8-1d7a-40ca-b17e-573a0743ea8a.png)
 
@@ -17,11 +17,7 @@ Tiedostolla Index on ei-pysyvä yhteys sovelluslogiikasta vastaavaan AppFunction
 
 ## Käyttöliittymä
 
-Käyttöliittymän luokka App on sovelluksen pääluokka ja se perii ttk.Window-luokan ja määrittelee esimerkiksi ikkunan koon, fontin ja ttkbootstrap-teeman ja käynnistää pääsilmukan. 
 
-Sovelluksen osa-alueet, kuten kirjautumislomake on jaettu widgetteihin/komponentteihin jotka toteuttavat aina jonkin ominaisuuden. Komponentit käyttävät luokassa Data määriteltyjä muuttujia tiedon tallentamiseen, komponentin päivittämiseen ja tiedon välittämiseen muille komponenteille sekä App-luokalle. Lisäksi hakutoimintoa varten on "tracing" joka siis seuraa haku-merkkijonomuuttujan tilaa ja aina kun muuttujaa muokataan, niin se kutsuu käyttäjän sivun päivittävää metodia.
-
-App piilottaa osan komponenteista sovelluksen käynnistyksessä ja komponentit määrittelevät ne näkyviin tarvittaessa. App sisältää lisäksi metodit näytön keskikohdan määrittämiseen, uloskirjautumiseen, käyttäjän sivun päivittämiseen ja hakutoiminnon tapahtumankäsittelyyn. TkInter layoutin tekemisessä on käytetty grid-metodia. Käyttöliittymäkoodista kutsutaan aina tarvittaessa app_functions-tiedoston metodeja, koska siellä sijaitsee sovelluslogiikka.
 
 ## Sekvenssikaaviot 
 
