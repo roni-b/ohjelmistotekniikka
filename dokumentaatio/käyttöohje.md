@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Löydät viimeisimmän [relasen](https://github.com/roni-b/ohjelmistotekniikka/releases) linkistä.
+Löydät viimeisimmän relasen [täältä](https://github.com/roni-b/ohjelmistotekniikka/releases).
 
 ## Aloitusnäkymä
 Sovellus käynnistyy seuraavaan näkymään:
@@ -45,11 +45,3 @@ Kun painat "Save quote" lainaus tallennetaan tietokantaan ja näytetään käytt
 ## Tietyn tallennetun lainauksen hakeminen
 
 Voit hakea lainauksia tietokannasta hakusanalla, joka voi olla esimerkiksi lainauksessa esiintyvä sana, id, tekijä tai kategoria. Jos et näe hakutulosta, scrollaa ylös.
-
-
-
-
-
-
-
- 
