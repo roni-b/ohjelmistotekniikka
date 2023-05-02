@@ -10,16 +10,9 @@ Hakemistossa ```controller``` sijaitsee sovelluslogiikka.
 
 Käyttöliittymäkoodi sijaitsee ```views``` hakemistossa ja se on jaoteltu useampaan näkymätiedostoon. Lisäksi siellä on ```data_variables``` tiedosto, joka sisältää kaikki Tkinter muuttujat, mitä sovelluksessa käytetään. Tiedostosta ```widgets``` kutsutaan näkymätiedostojen luokkia.
 
+![Screenshot from 2023-05-02 15-12-48](https://user-images.githubusercontent.com/104189902/235663064-0ad23c1c-8805-476d-84a1-2e105abb52c3.png)
 
-
-
-
-
-
-
-## Käyttöliittymä
-
-
+Hakemistorakenne pakkauskaaviona, jossa riippuvuudet on merkitty katkoviivalla.
 
 ## Sekvenssikaaviot 
 
