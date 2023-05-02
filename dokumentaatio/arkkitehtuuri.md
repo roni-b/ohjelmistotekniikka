@@ -4,13 +4,9 @@
 
 Ohjelman rakenne noudattaa MVC-arkkitehtuuria, jossa käyttöliittymä on eriytetty sovelluslogiikasta. Alla on kuvattu ohjelman pakkausrakenne:
 
-![Kuvaus tietorakenteesta](https://user-images.githubusercontent.com/104189902/232098366-10bafba8-1d7a-40ca-b17e-573a0743ea8a.png)
 
-Luokat User ja Quote määrittelevät db_functions tiedostossa sovelluksen tietokantataulut
 
-![Screenshot from 2023-04-14 19-25-54](https://user-images.githubusercontent.com/104189902/232102272-72021b44-33d3-4576-b20c-c240aef6527f.png)
 
-Tiedostolla Index on ei-pysyvä yhteys sovelluslogiikasta vastaavaan AppFunctions-luokkaan, jolla taas on pysyvä yhteys db_modules moduuliin, joka sisältää tietokannan käyttöön tarkoitetut funktiot.
 
 
 
@@ -31,3 +27,11 @@ Kun käyttäjä klikkaa uuden lainauksen hakupainikkeesta, käyttöliittymäkood
 ![Screenshot from 2023-04-21 17-28-39](https://user-images.githubusercontent.com/104189902/233661967-29023478-63c9-4e0d-8bfa-687ec037666c.png)
 
 Kirjauduttaessa kutsutaan sovelluslogiikan metodia login, jolle annetaan parametreiksi tunnus ja salasana. Sovelluslogiikka välittää tunnuksen ja salasanan tietokantaoperaatiolle login, joka tarkistaa onko tunnus olemassa ja salasana oikein. Jos ne ovat oikein, funktio palauttaa True ja sovelluslogiikka palauttaa käyttöliittymälle True sekä viestin onnistuneesta kirjautumisesta. Käyttöliittymä poistaa kirjautumislomakkeen näkyvistä ja sen tilalle tulee käyttäjän sivu. Lisäksi käyttäjän sivu uudelleenladataan, jolla varmistetaan sisällön ajantasaisuus. Lopuksi käyttäjälle näytetään viesti onnistuneesta kirjautumisesta.
+
+![Kuvaus tietorakenteesta](https://user-images.githubusercontent.com/104189902/232098366-10bafba8-1d7a-40ca-b17e-573a0743ea8a.png)
+
+Luokat User ja Quote määrittelevät db_functions tiedostossa sovelluksen tietokantataulut
+
+![Screenshot from 2023-04-14 19-25-54](https://user-images.githubusercontent.com/104189902/232102272-72021b44-33d3-4576-b20c-c240aef6527f.png)
+
+Tiedostolla Index on ei-pysyvä yhteys sovelluslogiikasta vastaavaan AppFunctions-luokkaan, jolla taas on pysyvä yhteys db_modules moduuliin, joka sisältää tietokannan käyttöön tarkoitetut funktiot.
