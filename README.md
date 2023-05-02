@@ -11,6 +11,7 @@ Sovelluksen idea on näyttää lyhyitä satunnaisia lainauksia eri henkilöiltä
 - [tuntikirjanpito](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/tuntikirjanpito.md)
 - [changelog](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/changelog.md)
 - [arkkitehtuuri](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/arkkitehtuuri.md)
+- [käyttöohje](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md)
 
 ### Asennus
 
