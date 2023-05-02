@@ -31,3 +31,5 @@
 
 - Muokattu ohjelman pakkausrakennetta järkevämmäksi ja refaktoroitu koodia
 - Muokattu salasanan tallentamista siten, että tietokantaan tallennetaan bcryptillä laskettu hash
+- Lisätty Docstring-kommentit useimpiin tiedostoihin ja tehty sovelluksen käyttöohje
+- Korjattu muutamia vikoja koodista
