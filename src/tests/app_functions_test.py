@@ -9,7 +9,7 @@ class TestAppFunctions(unittest.TestCase):
     def setUp(self):
         self.username = "account"
         self.password = "password"
-        self.quote = ['some random quote', 'author', "('random-quotes',)"]
+        self.quote = ['some random quote', 'author', "random-quotes"]
         self.category = "All"
         delete_user(self.username)
         delete_quote(self.quote[0])

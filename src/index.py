@@ -5,7 +5,11 @@ from views.widgets import Widgets
 from views.data_variables import User, Response, OtherData
 
 class App(ttk.Window):
+    """Luokka, joka käynnistää sovelluksen ja sisältää metodit widgeteille.
+    """
     def __init__(self):
+        """Luokan konstruktori, joka määrittää Tkiner-ikkunan ja kutsuu tarvittavia luokkia.
+        """
         super().__init__(themename="vapor")
         self.title("")
         self.width = 1000
@@ -29,6 +33,15 @@ class App(ttk.Window):
         self.mainloop()
 
     def _center_position(self, width, height):
+        """Laskee näytön keskikohdan.
+
+        Args:
+            width: ikkunan leveys
+            height: ikkunan korkeus
+
+        Returns:
+            Merkkijono, joka sisältää oikeat luvut
+        """
         display_width = self.winfo_screenwidth()
         display_height = self.winfo_screenheight()
         left = int(display_width / 2 - width / 2)
@@ -36,12 +49,17 @@ class App(ttk.Window):
         return f"{width}x{height}+{left}+{top}"
 
     def logout_function(self):
+        """Kirjaa käyttäjän ulos ja poistaa käyttäjän sivun näkyvistä, sekä
+           asettaa käyttäjätunnus- ja salasanamuuttujat tyhjiksi.
+        """
         self.widgets.user_page.grid_remove()
         self.widgets.login_form.grid()
         self.user_data.username.set(value="")
         self.user_data.password.set(value="")
 
     def refresh_user_page(self):
+        """Päivittää käyttäjän sivun sekä asettaa käyttäjän sivun sisällön muuttujaan.
+        """
         response = AppFunctions().show_user(self.user_data.username.get())
         parsed = ""
         for i in response["quotes"]:
@@ -50,6 +68,8 @@ class App(ttk.Window):
         self.user_data.content.set(parsed)
 
     def sort_user_page(self):
+        """Järjestää käyttäjän sivun hakutermin avulla, kun hakutoimintoa käytetään.
+        """
         response = AppFunctions().show_user(self.user_data.username.get())
         parsed_data = ""
         search_term = self.other_data.search_var.get().lower()
@@ -67,9 +87,15 @@ class App(ttk.Window):
     #pylint: disable=W0613
     #parameter *args is necessary
     def search_handler(self, *args):
+        """Toimii hakutoiminnon tapahtumankäsittelijänä,
+           ottaa parametrit vastaan ja
+           kutsuu sivun järjestämismetodia.
+        """
         self.sort_user_page()
 
     def get_categories(self):
+        """Hakee kategoriat, kun sovellus käynnistetään ja asettaa ne muuttujaan.
+        """
         all_categories = AppFunctions().get_categories()
         if all_categories[0] is True:
             messagebox.showerror(title="Error", message=all_categories[1])
@@ -77,6 +103,8 @@ class App(ttk.Window):
             self.other_data.categories.set(all_categories)
 
     def update_quote(self):
+        """Hakee uuden lainauksen ja asettaa sen näkyville.
+        """
         new_quote = AppFunctions().get_new_quote(self.other_data.category.get())
         if new_quote[0] is True:
             messagebox.showerror(title="Error", message=new_quote[1])
@@ -90,6 +118,9 @@ class App(ttk.Window):
             self.widgets.quote_options.grid()
 
     def save_quote(self):
+        """Lähettää tallennettavan lainauksen siitä vastaavalle metodille.
+        Päivittää lopuksi käyttäjän sivun.
+        """
         if self.user_data.username.get():
             AppFunctions().add_quote(
                 self.user_data.username.get(),
@@ -100,6 +131,8 @@ class App(ttk.Window):
             self.refresh_user_page()
 
     def show_hide(self):
+        """Vastaa lainauksen piilottamisesta ja uudelleen näyttämisestä.
+        """
         if self.other_data.hide_text.get() == "Hide quote":
             self.other_data.hide_text.set("Show quote")
             self.widgets.quote_text.grid_remove()
@@ -108,6 +141,12 @@ class App(ttk.Window):
             self.other_data.hide_text.set("Hide quote")
 
     def login_form_submit_handler(self):
+        """On vastuussa kirjautumisesta ja rekisteröitymisestä, tarkistaa molempien 
+        pituuden ja lähettää ne toiminnosta vastaavalle metodille. Näyttää virheen, jos
+        kirjautuminen ei onnistu.
+
+        Jos register_or_login muuttujan arvo on 1, kyseessä on rekisteröityminen. 
+        """
         if len(self.user_data.username.get()) >= 3 and len(self.user_data.password.get()) >= 3:
             if self.other_data.register_or_login.get():
                 # register
@@ -138,6 +177,12 @@ class App(ttk.Window):
 
     @staticmethod
     def on_mousewheel(event, canvas):
+        """Toteuttaa scrollauksen hiiren rullalle.
+
+        Args:
+            event: tapahtuman parametrit
+            canvas: alue jota scrollataan
+        """
         if event.num == 4:
             direction = -1
         elif event.num == 5:

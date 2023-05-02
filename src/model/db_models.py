@@ -10,6 +10,9 @@ association_table = Table('association', Base.metadata,
                           )
 
 class User(Base):
+    """
+    Käyttäjäolio, joka edustaa käyttäjää tietokannassa.
+    """
     __tablename__ = "users"
     uid = Column("id", Integer, primary_key=True)
     username = Column("username", String, unique=True, nullable=False)
@@ -18,9 +21,15 @@ class User(Base):
         "Quote", secondary=association_table, back_populates="users")
 
     def __repr__(self):
+        """
+        Palauttaa käyttäjän merkkijonoesityksen.
+        """
         return f"user: {self.uid} {self.username} {self.password}"
 
 class Quote(Base):
+    """
+    Lainausolio, joka edustaa lainausta tietokannassa.
+    """
     __tablename__ = "quotes"
     qid = Column("id", Integer, primary_key=True)
     content = Column("content", String)
@@ -37,6 +46,16 @@ engine = create_engine('sqlite:///src/model/mydb.db')
 session_maker = sessionmaker(bind=engine)
 
 def register(username, password):
+    """
+    Rekisteröi käyttäjän tietokantaan.
+
+    Args:
+        username (str): Käyttäjänimi
+        password (str): Salasana
+
+    Returns:
+        bool: True, jos käyttäjän rekisteröinti onnistui, muuten False.
+    """
     password_bytes = password.encode('utf-8')
     password_salt = bcrypt.gensalt()
     password_hash = bcrypt.hashpw(password_bytes, password_salt)
@@ -50,12 +69,31 @@ def register(username, password):
             return False
 
 def login(username, password):
+    """
+    Kirjaa käyttäjän sisään tietokantaan.
+
+    Args:
+        username (str): Käyttäjänimi
+        password (str): Salasana
+
+    Returns:
+        bool: True, jos käyttäjän kirjautuminen onnistui, muuten False.
+    """
     password_bytes = password.encode('utf-8')
     with session_maker() as session:
         user = session.query(User).filter_by(username=username).first()
         return user and bcrypt.checkpw(password_bytes, user.password)
 
 def show_user(username):
+    """
+    Palauttaa käyttäjän tiedot.
+
+    Args:
+        username (str): Käyttäjänimi
+
+    Returns:
+        dict or False: Käyttäjän tiedot sanakirjana tai False, jos käyttäjää ei ole.
+    """
     with session_maker() as session:
         user = session.query(User).filter_by(username=username).first()
         if user:
@@ -69,6 +107,16 @@ def show_user(username):
         return False
 
 def add_quote(username, quote):
+    """Lisää uuden lainauksen tietokantaan käyttäjänimellä ja lainauksella.
+
+    Args:
+        username (str): käyttäjänimi
+        quote (tuple): uusi lainaus muodossa (sisältö, kirjoittaja, tunnisteet)
+
+    Returns:
+        bool: Palauttaa True, jos lainaus lisättiin tietokantaan onnistuneesti, 
+              None jos lainaus löytyy jo tietokannasta tai False jos käyttäjää ei löydy.
+    """
     with session_maker() as session:
         test = session.query(Quote).filter_by(content=quote[1]).first()
         if test:
@@ -81,6 +129,15 @@ def add_quote(username, quote):
         return True
 
 def delete_user(username):
+    """Poistaa käyttäjän tietokannasta käyttäjänimen perusteella.
+
+    Args:
+        username (str): käyttäjänimi
+
+    Returns:
+        bool: Palauttaa True, jos käyttäjä poistettiin tietokannasta onnistuneesti, 
+              False jos käyttäjää ei löydy.
+    """
     with session_maker() as session:
         user = session.query(User).filter_by(username=username).first()
         if user:
@@ -90,6 +147,15 @@ def delete_user(username):
         return False
 
 def delete_quote(content):
+    """Poistaa lainauksen tietokannasta lainauksen sisällön perusteella.
+
+    Args:
+        content (str): lainauksen sisältö
+
+    Returns:
+        bool: Palauttaa True, jos lainaus poistettiin tietokannasta onnistuneesti, 
+              False jos lainausta ei löydy.
+    """
     with session_maker() as session:
         quote = session.query(Quote).filter(Quote.content == content).first()
         if quote:

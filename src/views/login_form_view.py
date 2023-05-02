@@ -1,12 +1,25 @@
 import ttkbootstrap as ttk
 
 class LoginForm(ttk.Frame):
+    """Luokka, joka toteuttaa kirjautumisnäkymän.
+    Args:
+        Perii ttk-ikkunan.
+    """
     def __init__(self, parent, username, password, register_or_login):
+        """Luokan konstruktori, joka asettaa parametrit ja kutsuu lopuksi näkymän
+        luovaa metodia.
+
+        Args:
+            parent: Yliluokan self
+            username: Käyttäjätunnus
+            password: Salasana
+            register_or_login: Kertoo totuusarvolla kumpi on kyseessä.
+        """
         super().__init__(master=parent)
-        self.app_instance = parent
         self.grid(row=0, column=0, rowspan=1, columnspan=1,
                   sticky="nsew", padx=10, pady=10)
 
+        self.app_instance = parent
         self.username = username
         self.password = password
         self.register_or_login = register_or_login
@@ -20,6 +33,8 @@ class LoginForm(ttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
+        """Asettaa kirjautumislomakkeen näkyväksi.
+        """
         self.label = ttk.Label(self, text="Login")
         self.label.grid(row=0, column=0, sticky="nw")
 
