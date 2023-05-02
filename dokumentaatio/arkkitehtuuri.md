@@ -8,17 +8,20 @@ Hakemistossa ```model``` sijaitsee tietokantakuvaus ja funktiot tietokannan käy
 
 Hakemistossa ```controller``` sijaitsee sovelluslogiikka.
 
-Käyttöliittymäkoodi sijaitsee ```views``` hakemistossa ja se on jaoteltu useampaan näkymätiedostoon. Lisäksi siellä on ```data_variables``` tiedosto, joka sisältää kaikki Tkinter muuttujat, mitä sovelluksessa käytetään. Tiedostosta ```widgets``` kutsutaan näkymätiedostojen luokkia.
+Käyttöliittymän näkymätiedostot sijaitsee ```views``` hakemistossa. Lisäksi siellä on ```data_variables``` tiedosto, joka sisältää kaikki Tkinter muuttujat, mitä sovelluksessa käytetään. Tiedostosta ```widgets``` kutsutaan näkymätiedostojen luokkia.
 
-![Pakkauskaavio](https://user-images.githubusercontent.com/104189902/235663064-0ad23c1c-8805-476d-84a1-2e105abb52c3.png)
+Tiedoston ```index``` luokassa ```App``` sijaitsee metodit kaikkiin sovelluslogiikkaa vaativiin tehtäviin, kuten kirjautumiseen.
+
+Esimerkiksi kirjautumispainiketta painettaessa, näkymätiedostosta kutsutaan luokan ```App``` metodeja ja sieltä taas ```controller``` hakemiston sovelluslogiikkaa.
+
+![Pakkauskaavio](https://user-images.githubusercontent.com/104189902/235672440-00760644-8049-4e9e-9231-d6f04607adc1.png)
+
 
 Hakemistorakenne pakkauskaaviona, jossa riippuvuudet on merkitty katkoviivalla.
 
 ## Sovelluslogiikka
 
-Ohjelman sovelluslogiikka on luokassa ```AppFunctions``` ja se sisältää kaikki käyttöliittymän tarvitsemat metodit. Luokan metodit käyttävät tietojen tallentamiseen ja hakemiseen ```db_models``` tiedoston funktioita. 
-
-
+Ohjelman sovelluslogiikka on luokassa ```AppFunctions``` ja se sisältää kaikki käyttöliittymän tarvitsemat metodit. Luokan metodit käyttävät tietojen tallentamiseen ja hakemiseen ```db_models``` tiedoston funktioita.
 
 ## Sekvenssikaaviot 
 
