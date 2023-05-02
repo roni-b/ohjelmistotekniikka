@@ -82,7 +82,7 @@ class App(ttk.Window):
                 search_term in content or
                 search_term in str(qid) or
                 search_term in tags):
-                parsed_data += f"id:{qid}\ntags: {tags}\n{content}\n{author}\n\n"
+                parsed_data += f"id:{qid}\ntags: {i['tags']}\n{i['content']}\n{i['author']}\n\n"
         self.user_data.content.set(parsed_data)
     #pylint: disable=W0613
     #parameter *args is necessary
@@ -149,7 +149,6 @@ class App(ttk.Window):
         """
         if len(self.user_data.username.get()) >= 3 and len(self.user_data.password.get()) >= 3:
             if self.other_data.register_or_login.get():
-                # register
                 response = AppFunctions().register(
                     self.user_data.username.get(),
                     self.user_data.password.get()
@@ -160,7 +159,6 @@ class App(ttk.Window):
                     self.widgets.user_page.grid()
                 messagebox.showinfo(title="Note", message=response[1])
             else:
-                # login
                 response = AppFunctions().login(
                     self.user_data.username.get(),
                     self.user_data.password.get()
