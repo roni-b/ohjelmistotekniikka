@@ -1,4 +1,4 @@
-### Käyttöohje
+# Käyttöohje
 
 Löydät viimeisimmän [relasen](https://github.com/roni-b/ohjelmistotekniikka/releases) linkistä.
 
