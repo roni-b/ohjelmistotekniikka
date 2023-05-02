@@ -14,6 +14,12 @@ Käyttöliittymäkoodi sijaitsee ```views``` hakemistossa ja se on jaoteltu usea
 
 Hakemistorakenne pakkauskaaviona, jossa riippuvuudet on merkitty katkoviivalla.
 
+## Sovelluslogiikka
+
+Ohjelman sovelluslogiikka on luokassa ```AppFunctions``` ja se sisältää kaikki käyttöliittymän tarvitsemat metodit. Luokan metodit käyttävät tietojen tallentamiseen ja hakemiseen ```db_models``` tiedoston funktioita. 
+
+
+
 ## Sekvenssikaaviot 
 
 Alla on kuvattuna sovelluksen päätoiminnallisuudet sekvenssikaavioina:
