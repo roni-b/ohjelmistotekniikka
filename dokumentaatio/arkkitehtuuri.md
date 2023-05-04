@@ -12,7 +12,7 @@ Käyttöliittymän näkymätiedostot sijaitsee ```views``` hakemistossa. Lisäks
 
 Tiedoston ```index``` luokassa ```App``` sijaitsee metodit kaikkiin sovelluslogiikkaa vaativiin tehtäviin, kuten kirjautumiseen.
 
-Esimerkiksi kirjautumispainiketta painettaessa, näkymätiedostosta kutsutaan luokan ```App``` metodeja ja sieltä taas ```controller``` hakemiston sovelluslogiikkaa.
+Esimerkiksi kirjautumispainiketta painettaessa, näkymätiedostosta kutsutaan luokan ```App``` metodia ```login_form_submit_handler``` ja sieltä data lähetetään parametrina ```controller``` hakemiston sovelluslogiikasta vastaavalle luokalle. Luokan metodi ```login``` lähettää datan parametrina ```model``` hakemiston funktion ```login``` käsiteltäväksi, joka tekee tarvittavan tietokantaoperaation ja palauttaa tiedon tapahtuman onnistumisesta.
 
 ![Pakkauskaavio](https://user-images.githubusercontent.com/104189902/235672440-00760644-8049-4e9e-9231-d6f04607adc1.png)
 
