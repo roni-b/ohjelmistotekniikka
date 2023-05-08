@@ -1,5 +1,5 @@
 import ttkbootstrap as ttk
-from utils import create_content_frame
+from .utils import create_content_frame
 
 class UserPage(ttk.Frame):
     """Luokka, joka toteuttaa käyttäjän sivun.

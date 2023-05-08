@@ -5,7 +5,8 @@ from views.widgets import Widgets
 from views.data_variables import User, Response, OtherData
 
 class App(ttk.Window):
-    """Luokka, joka käynnistää sovelluksen ja sisältää metodit widgeteille.
+    """Luokka käynnistää sovelluksen ja sisältää metodit, jotka ovat yhteydessä sovelluslogiikkaan
+    ja joita näkymätiedostot voivat kutsua.
     """
     def __init__(self):
         """Luokan konstruktori, joka määrittää Tkiner-ikkunan ja kutsuu tarvittavia luokkia.

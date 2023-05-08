@@ -1,8 +1,8 @@
-from login_form_view import LoginForm
-from quote_button_view import GetQuoteButton
-from quote_options_view import QuoteOptions
-from quote_text_view import QuoteText
-from user_page_view import UserPage
+from .login_form_view import LoginForm
+from .quote_button_view import GetQuoteButton
+from .quote_options_view import QuoteOptions
+from .quote_text_view import QuoteText
+from .user_page_view import UserPage
 
 class Widgets:
     def __init__(self, master, user_data, response_data, other_data):
