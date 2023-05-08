@@ -27,11 +27,11 @@ class QuoteText(ttk.Frame):
         self.text_label.pack()
         self.text_label.bind(
             "<Button-4>",
-            lambda event: parent.on_mousewheel(event, self.text_label)
+            lambda event: parent.on_mousewheel(event, self.canvas)
         )
         self.text_label.bind(
             "<Button-5>",
-            lambda event: parent.on_mousewheel(event, self.text_label)
+            lambda event: parent.on_mousewheel(event, self.canvas)
         )
 
         author_label = ttk.Label(
