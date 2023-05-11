@@ -1,30 +1,30 @@
 ## Sovelluksen tarkoitus
 
-Ideana on tehdä sovellus, joka näyttää erilaisia lyhyitä satunnaisia lainauksia eri henkilöiltä. Lainaukset haetaan [Quotable API](https://github.com/lukePeavey/quotable) -palvelusta käyttäen Pythonin Requests -moduulia. Käyttäjä voi halutessaan tallentaa lainauksia tietokantaan, jolloin ne ovat aina saatavilla (on myös mahdollista poistaa). Käyttäjä voi myös piilottaa näkyvistä sellaiset lainaukset mistä ei pidä. Sovellukseen on mahdollista rekisteröidä tunnus ja käyttäjälle näytetään oma näkymänsä lainauksista.
+Ideana on tehdä sovellus, joka näyttää erilaisia lyhyitä satunnaisia lainauksia/sitaatteja eri henkilöiltä. Lainaukset haetaan [Quotable API](https://github.com/lukePeavey/quotable) -palvelusta käyttäen Pythonin Requests -moduulia. Käyttäjä voi halutessaan tallentaa lainauksia tietokantaan, jolloin ne ovat aina saatavilla. Käyttäjä voi myös piilottaa näkyvistä sellaiset lainaukset mistä ei pidä. Sovellukseen on mahdollista rekisteröidä tunnus ja käyttäjälle näytetään oma näkymänsä lainauksista.
 
 ## Käyttäjät
 
-Yksi käyttäjärooli, eli normaali käyttäjä. Myöhemmin saatetaan lisätä pääkäyttäjä jos on tarvetta.
+Yksi käyttäjärooli, eli normaali käyttäjä.
 
 ## Perusversion tarjoama toiminnallisuus
 
-*Toteutetut toiminnot merkitty :heavy_check_mark:*
-
 **Ennen kirjautumista**
-- :heavy_check_mark: Käyttäjä voi luoda uniikin käyttäjätunnuksen
-- :heavy_check_mark: Käyttäjä voi kirjautua sovellukseen kirjautumislomakkeen avulla
-- :heavy_check_mark: Sovellus tarkistaa, että tunnus ja salasana täsmäävät
+- Käyttäjä voi luoda käyttäjätunnuksen
+  - Tunnus ja salasana oltava vähintään 3 merkkiä pitkä
+- Käyttäjä voi kirjautua sovellukseen kirjautumislomakkeen avulla
+- Sovellus tarkistaa, että tunnus ja salasana täsmäävät
+  - Sovellus ilmoittaa kirjautumisen onnistumisesta
 
 **Kirjautumisen jälkeen**
 
-- :heavy_check_mark: Käyttäjä näkee tallennetut lainaukset ja painikkeen mistä saa haettua uuden lainauksen
-- :heavy_check_mark: Uuden lainauksen mukana toiminto jolla sen saa tallennettua tietokantaan tai piilotettua näkyvistä
-- :heavy_check_mark: Mahdollisuus kirjautua ulos
+- Käyttäjä näkee tallennetut lainaukset ja painikkeen mistä saa haettua uuden lainauksen
+- Käyttäjän klikatessa painiketta, uusi lainaus näytetään ja avautuu valikko
+  - Valikossa toiminnot, jolla lainauksen saa tallennettua tietokantaan, piilotettua näkyvistä tai vaihdettua kategorian
+- Käyttäjä voi järjestää ja hakea tallennettuja lainauksia hakutoiminnolla 
 
 **Jatkokehitysideoita**
 
-- :heavy_check_mark: Lainausten järjestäminen jollain tavalla
-- :heavy_check_mark: Hakutoiminto tietyn lainauksen tai sen tekijän etsimiseen
-- :heavy_check_mark: Uusien lainausten hakeminen tietystä kategoriasta
-
-*Hakutoiminnolla voi myös järjestää lainaukset, ei erillistä toimintoa*
+- Käyttäjätunnuksen poistaminen
+- Tallennetun lainauksen poistaminen
+- Tietyn tekijän lainausten hakeminen API:sta
+  - Tai hakusanalla haku
