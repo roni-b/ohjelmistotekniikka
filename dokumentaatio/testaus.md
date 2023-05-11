@@ -4,7 +4,7 @@ Ohjelman testaus on suoritettu unittest yksikkö- ja integraatiotesteillä. Jär
 
 ### Sovelluslogiikka
 
-Testiluokka `TestAppFunctions` testaa sovelluslogiikasta vastaavaa `AppFunctions`-luokkaa. Testit on toteutettu siten, että `AppFunctions`-luokan metodeja kutsutaan testien aluksi määritetyillä parametreilla. `AppFunctions` kutsuu`db_models` tiedoston tietokantafunktioita ja tallentaa siten tietokantaan. Ennen testejä tietokannasta poistetaan testikäyttäjä- ja lainaus.
+Testiluokka `TestAppFunctions` testaa sovelluslogiikasta vastaavaa `AppFunctions`-luokkaa. Testit on toteutettu siten, että `AppFunctions`-luokan metodeja kutsutaan testien aluksi määritetyillä parametreilla. `AppFunctions` kutsuu normaalisti `db_models` tiedoston tietokantafunktioita ja tallentaa siten tietokantaan. Ennen testejä tietokannasta poistetaan testikäyttäjä- ja lainaus.
 
 Lainausten haun integraatiotestauksessa on käytetty unittest.mock-kirjaston patch-metodia, jolla on asetettu sivuvaikutuksia requests.get-pyynnöille ja muokattu API:n palauttamaa dataa.
 
