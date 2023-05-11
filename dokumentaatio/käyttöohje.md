@@ -21,12 +21,11 @@ Kun haluat piilottaa lainauksen, paina "Hide quote" painiketta. Näkymä on kirj
 
 ## Kategorian valitseminen
 
-Jos haluat hakea lainauksia tietystä kategoriasta, paina "Select category" ja pudotusvalikko aukeaa.
+Jos haluat hakea lainauksia tietystä kategoriasta, paina "Select category" ja valitse kategoria pudotusvalikosta.
 
 ## Rekisteröityminen ja kirjautuminen
 
-Syötä ensin käyttäjän tiedot kenttiin ja valitse kohta "Register". Tunnus ja salasana on oltava vähintään 3 merkkiä pitkä.
-Kirjautuminen käyttää samaa lomaketta, muista vain poistaa valinta "Register" painikkeesta.
+Syötä ensin käyttäjän tiedot kenttiin ja paina kirjautumispainiketta. Jos haluat rekisteröityä valitse lisäksi kohta "Register".  Tunnus ja salasana on oltava vähintään 3 merkkiä pitkä.
 
 ## Käyttäjän sivu
 
