@@ -25,7 +25,7 @@ Jos haluat hakea lainauksia tietystä kategoriasta, paina "Select category" ja v
 
 ## Rekisteröityminen ja kirjautuminen
 
-Syötä ensin käyttäjän tiedot kenttiin ja paina kirjautumispainiketta. Jos haluat rekisteröityä valitse lisäksi kohta "Register".  Tunnus ja salasana on oltava vähintään 3 merkkiä pitkä.
+Syötä ensin käyttäjän tiedot kenttiin ja paina kirjautumispainiketta. Jos haluat rekisteröityä, valitse lisäksi kohta "Register".  Tunnus ja salasana on oltava vähintään 3 merkkiä pitkä.
 
 ## Käyttäjän sivu
 
