@@ -4,6 +4,6 @@
 htmlcov
 __pycache__
 alembic
-mydb.db
+database.db
 alembic.ini
 htmlcov

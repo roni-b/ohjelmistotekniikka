@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, Table, exc
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 import bcrypt
+from config import DATABASE_FILENAME
 
 Base = declarative_base()
 
@@ -41,7 +42,7 @@ class Quote(Base):
     def __repr__(self):
         return f"quote: {self.qid} {self.content} {self.author} {self.tags}"
 
-engine = create_engine('sqlite:///src/model/mydb.db')
+engine = create_engine(f"sqlite:///src/model/{DATABASE_FILENAME}")
 
 session_maker = sessionmaker(bind=engine)
 
@@ -114,7 +115,7 @@ def add_quote(username, quote):
         quote (tuple): uusi lainaus muodossa (sisältö, kirjoittaja, tunnisteet)
 
     Returns:
-        bool: Palauttaa True, jos lainaus lisättiin tietokantaan onnistuneesti, 
+        bool: Palauttaa True, jos lainaus lisättiin tietokantaan onnistuneesti,
               None jos lainaus löytyy jo tietokannasta tai False jos käyttäjää ei löydy.
     """
     with session_maker() as session:
@@ -135,7 +136,7 @@ def delete_user(username):
         username (str): käyttäjänimi
 
     Returns:
-        bool: Palauttaa True, jos käyttäjä poistettiin tietokannasta onnistuneesti, 
+        bool: Palauttaa True, jos käyttäjä poistettiin tietokannasta onnistuneesti,
               False jos käyttäjää ei löydy.
     """
     with session_maker() as session:
@@ -153,7 +154,7 @@ def delete_quote(content):
         content (str): lainauksen sisältö
 
     Returns:
-        bool: Palauttaa True, jos lainaus poistettiin tietokannasta onnistuneesti, 
+        bool: Palauttaa True, jos lainaus poistettiin tietokannasta onnistuneesti,
               False jos lainausta ei löydy.
     """
     with session_maker() as session:
