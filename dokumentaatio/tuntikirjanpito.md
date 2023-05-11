@@ -20,4 +20,5 @@
 | 1.5. | 2    | Koodin refaktorointi |
 | 1.5. | 2    | Dokumentaatio |
 | 2.5. | 2    | Dokumentaatio |
-| yht. | 41  |  |
+| 11.5. | 4    | Dokumentaatio |
+| yht. | 45  |  |
