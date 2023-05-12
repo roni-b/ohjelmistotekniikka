@@ -23,6 +23,10 @@ Hakemistorakenne pakkauskaaviona, jossa riippuvuudet on merkitty katkoviivalla.
 
 Ohjelman sovelluslogiikka on luokassa ```AppFunctions``` ja se sisältää kaikki käyttöliittymän tarvitsemat metodit. Luokan metodit käyttävät tietojen tallentamiseen ja hakemiseen ```db_models``` tiedoston funktioita.
 
+## Tietojen tallennus
+
+Ohjelma käyttää sqlite-tietokantaa tallentamiseen. Tietokantatiedoston nimen voi muuttaa .env tiedostosta.
+
 ## Sekvenssikaaviot 
 
 Alla on kuvattuna sovelluksen päätoiminnallisuudet sekvenssikaavioina:
