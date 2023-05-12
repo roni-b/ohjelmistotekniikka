@@ -41,7 +41,7 @@ class Quote(Base):
     def __repr__(self):
         return f"quote: {self.qid} {self.content} {self.author} {self.tags}"
 
-engine = create_engine(f"sqlite:///src/model/database.db")
+engine = create_engine('sqlite:///src/model/database.db')
 
 session_maker = sessionmaker(bind=engine)
 
