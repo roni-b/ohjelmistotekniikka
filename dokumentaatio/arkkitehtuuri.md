@@ -37,4 +37,8 @@ Kun käyttäjä klikkaa uuden lainauksen hakupainikkeesta, käyttöliittymäkood
 
 ![Screenshot from 2023-04-21 17-28-39](https://user-images.githubusercontent.com/104189902/233661967-29023478-63c9-4e0d-8bfa-687ec037666c.png)
 
-Kirjauduttaessa kutsutaan sovelluslogiikan metodia login, jolle annetaan parametreiksi tunnus ja salasana. Sovelluslogiikka välittää tunnuksen ja salasanan tietokantaoperaatiolle login, joka tarkistaa onko tunnus olemassa ja salasana oikein. Jos ne ovat oikein, funktio palauttaa True ja sovelluslogiikka palauttaa käyttöliittymälle True sekä viestin onnistuneesta kirjautumisesta. Käyttöliittymä poistaa kirjautumislomakkeen näkyvistä ja sen tilalle tulee käyttäjän sivu. Lisäksi käyttäjän sivu uudelleenladataan, jolla varmistetaan sisällön ajantasaisuus. Lopuksi käyttäjälle näytetään viesti onnistuneesta kirjautumisesta.
+Kirjauduttaessa kutsutaan sovelluslogiikan metodia login, jolle annetaan parametreiksi tunnus ja salasana. Sovelluslogiikka välittää tunnuksen ja salasanan tietokantaoperaatiolle login, joka tarkistaa onko tunnus olemassa ja salasana oikein. Jos ne ovat oikein, funktio palauttaa True ja sovelluslogiikka palauttaa käyttöliittymälle True, sekä viestin onnistuneesta kirjautumisesta. Käyttöliittymä poistaa kirjautumislomakkeen näkyvistä ja sen tilalle tulee käyttäjän sivu. Lisäksi käyttäjän sivu uudelleenladataan, jolla varmistetaan sisällön ajantasaisuus. Lopuksi käyttäjälle näytetään viesti onnistuneesta kirjautumisesta.
+
+### Rekisteröityminen 
+
+Uuden tunnuksen luominen tapahtuu pitkälti saman kaavan mukaisesti, kuin kirjautuminen. Erona se, että silloin kutsutaan register-metodia, joka tarkistaa tunnuksen ja salasanan pituuden, sekä tietokantafunktio register luo salasanalle hash-arvon ja yrittää lisätä käyttäjän tietokantaan. 
