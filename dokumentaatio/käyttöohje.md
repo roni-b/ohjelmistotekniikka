@@ -4,7 +4,7 @@ Löydät viimeisimmän relasen [täältä](https://github.com/roni-b/ohjelmistot
 
 ## Konfigurointi
 
-Voit muuttaa titeokantatiedoston nimeä .env tiedostossa.
+Voit määritellä luotavan tietokantatiedoston nimen .env tiedostossa. 
 
 ## Aloitusnäkymä
 Sovellus käynnistyy seuraavaan näkymään:
