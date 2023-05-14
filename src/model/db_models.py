@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, Table, exc
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 import bcrypt
+from config import DATABASE_FILENAME
 
 Base = declarative_base()
 
@@ -41,7 +42,7 @@ class Quote(Base):
     def __repr__(self):
         return f"quote: {self.qid} {self.content} {self.author} {self.tags}"
 
-engine = create_engine('sqlite:///src/model/database.db')
+engine = create_engine(f'sqlite:///src/model/{DATABASE_FILENAME}')
 
 session_maker = sessionmaker(bind=engine)
 
