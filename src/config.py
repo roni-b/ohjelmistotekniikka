@@ -9,4 +9,3 @@ except FileNotFoundError:
     pass
 
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
-

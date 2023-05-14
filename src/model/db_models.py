@@ -1,6 +1,12 @@
+import os
+import sys
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, Table, exc
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 import bcrypt
+current_path = os.path.abspath(__file__)
+parent_path = os.path.dirname(current_path)
+src_path = os.path.abspath(os.path.join(parent_path, ".."))
+sys.path.insert(0, src_path)
 from config import DATABASE_FILENAME
 
 Base = declarative_base()
