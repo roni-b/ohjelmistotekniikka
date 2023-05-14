@@ -2,6 +2,10 @@
 
 Löydät viimeisimmän relasen [täältä](https://github.com/roni-b/ohjelmistotekniikka/releases).
 
+## Konfigurointi
+
+Voit muuttaa titeokantatiedoston nimeä .env tiedostossa.
+
 ## Aloitusnäkymä
 Sovellus käynnistyy seuraavaan näkymään:
 
