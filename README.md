@@ -12,6 +12,10 @@ Sovelluksen idea on näyttää lyhyitä satunnaisia lainauksia eri henkilöiltä
 - [käyttöohje](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md)
 - [testausdokumentti](https://github.com/roni-b/ohjelmistotekniikka/blob/main/dokumentaatio/testaus.md)
 
+### Ohjelman ajo Docker-konttina
+
+`xhost + && docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix roni120/ot-harjoitus "$@"`
+
 ### Asennus
 
 Asenna riippuvuudet
